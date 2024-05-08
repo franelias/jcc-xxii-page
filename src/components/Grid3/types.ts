@@ -1,0 +1,1 @@
+export type Grid3Props = unknown;
