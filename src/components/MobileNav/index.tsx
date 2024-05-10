@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { useAccordion } from "../../useAccordion";
+import { useAccordion } from "../../hooks/useAccordion";
 import { BiChevronDown } from "react-icons/bi";
 
 import { MobileNavType } from "./types";
