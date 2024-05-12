@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 
 html,
 body {
@@ -8,7 +9,10 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+
+  font-family: "Reddit sans" !important;
+  font-optical-sizing: auto;
+  font-style: normal;
 
   --primary-color: #223611;
   --secondary-color: #d3c593;
@@ -17,5 +21,7 @@ body {
 #root {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  font-family: "Reddit sans" !important;
+  font-optical-sizing: auto;
+  font-style: normal;
 }

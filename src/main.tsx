@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import './index.scss'
 import { IntlProvider } from "react-intl";
 
-window.env = { baseUrl: import.meta.env.PROD ? "https://jcc.dcc.fceia.unr.edu.ar/2023/" : "http://localhost:5173/" }
+import './index.scss'
+
+window.env = { baseUrl: import.meta.env.PROD ? "https://jcc.dcc.fceia.unr.edu.ar/2024/" : "http://localhost:5173/" }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

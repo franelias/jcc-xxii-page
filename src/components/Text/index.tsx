@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from "react";
 
 import "./styles.scss"
+import classNames from "classnames";
 
-const Text: React.FC<PropsWithChildren> = ({ children }) => {
+const Text: React.FC<PropsWithChildren & { className?: string }> = ({ children, className }) => {
     return (
-        <p className="font-light leading-relaxed text-justify md:text-center md:text-xl">
+        <p className={classNames(`font-light text-start md:text-l`, className)}>
             {children}
         </p>
     );
