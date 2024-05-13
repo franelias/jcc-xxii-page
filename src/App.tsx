@@ -1,6 +1,8 @@
 import Layout, { Content, Footer } from "antd/es/layout/layout";
 import Header from "./components/Header";
 import backgroundPhoto from "./assets/foto.jpg";
+import neuralLogo from "./assets/logo_neuralsoft.svg";
+import deepAgroLogo from "./assets/logo_deepagro.png";
 import cafe from "./assets/cafe.jpg";
 import futbol from "./assets/futbol.jpeg";
 import CenterTitle from "./components/CenterTitle";
@@ -8,6 +10,16 @@ import Text from "./components/Text";
 import { Card } from "antd";
 
 const App = () => {
+  const sponsors = [
+    {
+      href: "https://www.neuralsoft.com/",
+      logo: neuralLogo
+    },
+    {
+      href: "https://www.deepagro.co/",
+      logo: deepAgroLogo
+    }]
+
   return (
     <Layout style={{ fontFamily: "Reddit sans" }}>
       <Header />
@@ -91,8 +103,8 @@ const App = () => {
         <div className="flex flex-col justify-center items-center bg-[#e7dccd] mt-8">
           <CenterTitle className="mt-8">Sponsors</CenterTitle>
           <div className="flex flex-row w-full items-center flex-wrap justify-around">
-            {window.sponsors.map(sponsor => <a target="_blank" className="w-full md:w-1/3 h-full max-h-[214px] flex items-center justify-center p-8" href={sponsor.href}>
-              <img className="object-cover max-h-[150px]" src={window.env.baseUrl + sponsor.logo} />
+            {sponsors.map(sponsor => <a target="_blank" className="w-full md:w-1/3 h-full max-h-[214px] flex items-center justify-center p-8" href={sponsor.href}>
+              <img className="object-cover max-h-[150px]" src={sponsor.logo} />
             </a>
             )}
           </div>
