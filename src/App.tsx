@@ -38,8 +38,8 @@ const App = () => {
 					<div className="md:w-1/3 flex flex-start flex-col items-center justify-center p-8 bg-[#e7dccd]">
 						<CenterTitle>Vuelven las JCC!</CenterTitle>
 						<Text className="mt-4">
-							Las Jornadas de Ciencias de la Computación vuelven los días 4, 5 y
-							6 de Octubre. Contaremos con la presencia de destacados
+							Las Jornadas de Ciencias de la Computación vuelven los días 23, 24
+							y 25 de Octubre. Contaremos con la presencia de destacados
 							expositores de distintas localidades argentinas, que están
 							radicados en diferentes partes del mundo. Las charlas se
 							realizarán en el salón de actos de la Facultad de Ciencias
