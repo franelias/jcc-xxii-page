@@ -2,7 +2,7 @@ import Layout, { Content, Footer } from "antd/es/layout/layout";
 import Header from "./components/Header";
 import backgroundPhoto from "./assets/foto.jpg";
 import neuralLogo from "./assets/logo_neuralsoft.svg";
-import sanCristobalSegurosLogo from "./assets/logo_sancristobalseguros.svg";
+import grupoSanCristobalLogo from "./assets/logo_gruposancristobal.svg";
 import deepAgroLogo from "./assets/logo_deepagro.png";
 import cafe from "./assets/cafe.jpg";
 import futbol from "./assets/futbol.jpeg";
@@ -21,8 +21,8 @@ const App = () => {
 			logo: deepAgroLogo,
 		},
 		{
-			href: "https://www.sancristobal.com.ar/institucional/",
-			logo: sanCristobalSegurosLogo,
+			href: "https://www.gruposancristobal.com.ar/",
+			logo: grupoSanCristobalLogo,
 		},
 	];
 
