@@ -2,7 +2,7 @@ import Layout, { Content, Footer } from "antd/es/layout/layout";
 import Header from "./components/Header";
 import backgroundPhoto from "./assets/foto.jpg";
 import neuralLogo from "./assets/logo_neuralsoft.svg";
-import grupoSanCristobalLogo from "./assets/logo_gruposancristobal.svg";
+// import grupoSanCristobalLogo from "./assets/logo_gruposancristobal.svg";
 import deepAgroLogo from "./assets/logo_deepagro.png";
 import cafe from "./assets/cafe.jpg";
 import futbol from "./assets/futbol.jpeg";
@@ -20,10 +20,10 @@ const App = () => {
 			href: "https://www.deepagro.co/",
 			logo: deepAgroLogo,
 		},
-		{
-			href: "https://www.gruposancristobal.com.ar/",
-			logo: grupoSanCristobalLogo,
-		},
+		// {
+		// 	href: "https://www.gruposancristobal.com.ar/",
+		// 	logo: grupoSanCristobalLogo,
+		// },
 	];
 
 	return (
@@ -148,7 +148,7 @@ const App = () => {
 
 				<div className="flex flex-col justify-center items-center mt-8">
 					<CenterTitle>Queres ser sponsor?</CenterTitle>
-					<Text className="mt-4">jcc@fceia.unr.edu.ar</Text>
+					<Text className="mt-4"> jcc@fceia.unr.edu.ar</Text>
 				</div>
 			</Content>
 			<Footer className="flex flex-row items-center justify-center">
