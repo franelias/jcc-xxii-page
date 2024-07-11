@@ -10,7 +10,14 @@ import CenterTitle from "./components/CenterTitle";
 import Text from "./components/Text";
 import { Card } from "antd";
 
+import FooterInfoRight from "./components/FooterInfoRight";
+import { BiMailSend, BiSolidMap, BiSolidPhone } from "react-icons/bi";
+import Link from "./components/Link";
+import logo from "./assets/logo-footer.png";
+import { useState } from "react";
+
 const App = () => {
+	const [activeYear, setActiveYear] = useState(-1);
 	const sponsors = [
 		{
 			href: "https://www.neuralsoft.com/",
@@ -147,15 +154,103 @@ const App = () => {
 				</div>
 
 				<div className="flex flex-col justify-center items-center mt-8">
-					<CenterTitle>Queres ser sponsor?</CenterTitle>
-					<Text className="mt-4"> jcc@fceia.unr.edu.ar</Text>
+					<CenterTitle>¿Queres ser sponsor?</CenterTitle>
+					<Text className="mt-6">
+						{" "}
+						Contactate con nosotros enviando un mail a{" "}
+						<Link key="ContactMail" url="mailto:https://jcc@fceia.unr.edu.ar">
+							{" "}
+							jcc@fceia.unr.edu.ar
+						</Link>
+						.
+					</Text>
 				</div>
 			</Content>
-			<Footer className="flex flex-row items-center justify-center">
+			<Footer className="flex flex-col items-center justify-center gap-5 p-5 text-xs text-center text-gray-800  border-t md:gap-7 md:p-7 md:text-base">
+				<div className="flex flex-col items-center justify-between w-full gap-5 md:flex-row">
+					<img className="w-32" src={logo} alt="Logo" />
+					<div className="flex flex-col items-center flex-grow gap-3 md:items-start">
+						<span>Licenciatura en Ciencias de la Computación</span>
+						<span>Facultad de Ciencias Exactas, Ingeniería y Agrimensura</span>
+						<span>Universidad Nacional de Rosario</span>
+					</div>
+					<div className="flex flex-col items-center gap-3 md:items-end">
+						<FooterInfoRight
+							Icon={
+								<BiSolidMap
+									onClick={() => {
+										location.href = "https://maps.app.goo.gl/nesQwwaYqFwyLXUYA";
+									}}
+									style={{ cursor: "pointer" }}
+								/>
+							}
+						>
+							<Link
+								key={"Ubication"}
+								url="https://maps.app.goo.gl/nesQwwaYqFwyLXUYA"
+							>
+								Pellegrini 250, Rosario, Santa Fe, Argentina
+							</Link>
+						</FooterInfoRight>
+						<FooterInfoRight Icon={<BiSolidPhone />}>
+							(0341) 480-2649/60
+						</FooterInfoRight>
+						<FooterInfoRight
+							Icon={
+								<BiMailSend
+									onClick={() => {
+										location.href = "mailto:https://jcc@fceia.unr.edu.ar";
+									}}
+									style={{ cursor: "pointer" }}
+								/>
+							}
+						>
+							<Link key="ContactMail" url="mailto:https://jcc@fceia.unr.edu.ar">
+								{" "}
+								jcc@fceia.unr.edu.ar
+							</Link>
+						</FooterInfoRight>
+					</div>
+				</div>
+				<div className="w-full pt-5 font-bold border-t">
+					<CenterTitle>Ediciones anteriores</CenterTitle>
+					<div style={{ margin: "", lineHeight: 1.6, padding: "25px" }}>
+						{Array.from(
+							{ length: new Date().getFullYear() - 2005 + 1 },
+							(_, i) => 2005 + i
+						).map(
+							(year) =>
+								year !== 2024 && (
+									<>
+										{/* {year !== 2005 ? " - " : ""} */}
+										<span className="underline transition-colors cursor-pointer hover:text-red-800">
+											<Link
+												key={year}
+												url={`https://jcc.dcc.fceia.unr.edu.ar/${year}`}
+											>
+												<div
+													className={
+														year === activeYear ? "tag is-active" : "tag"
+													}
+													onClick={() => {
+														setActiveYear(year);
+													}}
+												>
+													{year}
+												</div>
+											</Link>
+										</span>
+									</>
+								)
+						)}
+					</div>
+				</div>
+			</Footer>
+			{/* <Footer className="flex flex-row items-center justify-center">
 				Facultad de Ciencias Exactas, Ingeniería y Agrimensura. Av. Pellegrini
 				250, Rosario, Santa Fe, República Argentina. Teléfono: (+54) 0341-
 				4802649
-			</Footer>
+			</Footer> */}
 		</Layout>
 	);
 };
