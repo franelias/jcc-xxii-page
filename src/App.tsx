@@ -54,6 +54,7 @@ const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
 }
 
 const App = () => {
+	const [activeYear, setActiveYear] = useState(-1);
 	const sponsors = [
 		{
 			name: "NeuralSoft",
@@ -283,7 +284,7 @@ const App = () => {
 				Facultad de Ciencias Exactas, Ingeniería y Agrimensura. Av. Pellegrini
 				250, Rosario, Santa Fe, República Argentina. Teléfono: (+54) 0341-
 				4802649
-			</Footer>
+			</Footer> 
 		</Layout>
 	);
 };
