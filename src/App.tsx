@@ -9,6 +9,7 @@ import futbol from "./assets/futbol.jpeg";
 import CenterTitle from "./components/CenterTitle";
 import Text from "./components/Text";
 import { Card } from "antd";
+import Terminal from "./components/Terminal";
 
 const App = () => {
 	const sponsors = [
@@ -28,6 +29,7 @@ const App = () => {
 
 	return (
 		<Layout style={{ fontFamily: "Reddit sans" }}>
+			<Terminal />
 			<Header />
 
 			<Content>
