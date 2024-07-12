@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import React, { PropsWithChildren } from "react";
 import "./styles.scss";
-// import { TerminalProps } from "./types";
+import { TerminalProps } from "./types";
 // import HackerSimulator from "./HackSimulator";
 // import YouTube from "./YouTube";
 
-const Typewriter = (text, delay, func, Spinner, spinTime) => {
+const Typewriter = (
+	text: String,
+	delay: number,
+	func: Function,
+	Spinner: Boolean = false,
+	spinTime: number = 5000
+) => {
 	const startTime = new Date();
 	let Output = "";
 	let index = 0;
@@ -44,27 +50,26 @@ const Typewriter = (text, delay, func, Spinner, spinTime) => {
 	}, delay);
 };
 
-const Terminal = () => {
+const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const [Text1, setText1] = useState("");
 	const [Text2, setText2] = useState("");
 	const [Text3, setText3] = useState("");
 	const [Text4, setText4] = useState("");
 	const cursor = "▮";
-	let previousCommand;
 
 	const generalComms = ["comm1", "comm2", "etc."];
 	const linkComms = ["link1", "link2", "etc."];
 	const userName = "jcc@dcc.fceia.unr.edu.ar";
 
-	const [prevusedCommand, setprevusedCommand] = useState([]);
+	const [prevusedCommand, setprevusedCommand] = useState<string[]>([]);
 
 	function SkipIntro() {
-		let id = setTimeout(() => {}, 0);
+		let id = setTimeout(() => {}, 0) as unknown as number;
 		while (id--) {
 			clearTimeout(id);
 		}
 
-		id = setInterval(() => {}, 0);
+		id = setInterval(() => {}, 0) as unknown as number;
 		while (id--) {
 			clearInterval(id);
 		}
@@ -72,18 +77,19 @@ const Terminal = () => {
 		setText3("Access Granted!");
 	}
 	const removeNotFound = () => {
-		document.getElementById("notFound").remove();
+		document.getElementById("notFound")?.remove();
 	};
+
 	useEffect(() => {
 		document.addEventListener("keydown", function (event) {
 			if (event.key === "Enter") {
 				if (!Text3.includes("Access")) {
-					let id = setTimeout(() => {}, 0);
+					let id: number = setTimeout(() => {}, 0) as unknown as number;
 					while (id--) {
 						clearTimeout(id);
 					}
 
-					id = setInterval(() => {}, 0);
+					id = setInterval(() => {}, 0) as unknown as number;
 					while (id--) {
 						clearInterval(id);
 					}
@@ -94,11 +100,12 @@ const Terminal = () => {
 				removeNotFound();
 				const CommandArea = document.getElementById("command");
 				if (CommandArea) {
-					previousCommand = CommandArea.value;
+					const previousCommand: string = (CommandArea as HTMLInputElement)
+						.value;
 					if (previousCommand !== "")
 						setprevusedCommand((prevArray) => [...prevArray, previousCommand]);
 
-					CommandArea.value = "";
+					(CommandArea as HTMLInputElement).value = "";
 				}
 			}
 		});
@@ -207,7 +214,7 @@ const Terminal = () => {
 						// 	);
 						// })
 					}
-					{console.log(prevusedCommand)}
+					{/* {console.log(prevusedCommand)} */}
 				</ul>
 				{Text3.includes("Access") ? (
 					<span className="commands">
