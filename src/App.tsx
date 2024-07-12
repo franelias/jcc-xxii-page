@@ -166,7 +166,16 @@ const App = () => {
 					</Text>
 				</div>
 			</Content>
-			<Footer className="flex flex-col items-center justify-center gap-5 p-5 text-xs text-center text-gray-800  border-t md:gap-7 md:p-7 md:text-base">
+			{/* <div
+				
+			></div> */}
+			<Footer
+				className="flex flex-col items-center justify-center gap-5 p-5 text-xs text-center text-gray-800  border-t md:gap-7 md:p-7 md:text-base"
+				style={{
+					marginTop: "20px",
+					marginBottom: "15px",
+				}}
+			>
 				<div className="flex flex-col items-center justify-between w-full gap-5 md:flex-row">
 					<img className="w-32" src={logo} alt="Logo" />
 					<div className="flex flex-col items-center flex-grow gap-3 md:items-start">
