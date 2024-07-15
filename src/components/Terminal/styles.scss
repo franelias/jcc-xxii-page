@@ -10,8 +10,8 @@ $font-color: #d3c593;
   font-size: 18px;
   line-height: 1.2;
   background-color: $background-color;
-  height: auto;
-  max-height: 350px;
+  height: 100%;
+  // max-height: 350px;
 }
 .fontColor{
   color: $font-color;
