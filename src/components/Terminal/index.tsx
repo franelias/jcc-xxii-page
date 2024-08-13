@@ -61,7 +61,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const cursor = "▮";
 
 	const [commMessage, setCommMessage] = useState<string>("");
-	const generalComms: [string, () => void][] = [
+	const generalComms: [string, (arg?: string) => void][] = [
 		[
 			"ls",
 			() => {
