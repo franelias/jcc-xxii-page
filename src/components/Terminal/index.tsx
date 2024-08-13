@@ -7,10 +7,10 @@ import { TerminalProps } from "./types";
 // import YouTube from "./YouTube";
 
 const Typewriter = (
-	text: String,
+	text: string,
 	delay: number,
-	func: Function,
-	Spinner: Boolean = false,
+	func: (s: string) => void,
+	Spinner: boolean = false,
 	spinTime: number = 5000
 ) => {
 	const startTime = new Date();
@@ -59,12 +59,11 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const Image: string[] = [];
 
 	const cursor = "▮";
-
 	const [commMessage, setCommMessage] = useState<string>("");
 	const generalComms: [string, (arg?: string) => void][] = [
 		[
 			"ls",
-			() => {
+		() => {
 				setCommMessage("");
 			},
 		],
@@ -98,9 +97,9 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	};
 
 	const parse = (command: string) => {
-		var comms = command.split(" ");
-		var cid = generalComms.findIndex((comm) => comm[0] === comms[0]);
-		var lid = linkComms.findIndex((comm) => comm[0] === comms[0]);
+		const comms = command.split(" ");
+		const cid = generalComms.findIndex((comm) => comm[0] === comms[0]);
+		const lid = linkComms.findIndex((comm) => comm[0] === comms[0]);
 		if (lid !== -1) window.open(linkComms[lid][1]);
 		else if (cid !== -1) generalComms[cid][1]();
 		else setCommMessage("bash: " + comms[0] + ": command not found" + "\n");
@@ -129,7 +128,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					const previousCommand: string = (CommandArea as HTMLInputElement)
 						.value;
 					if (previousCommand !== "") {
-						setprevusedCommand((prevArray) => [...prevArray, previousCommand]);
+					setprevusedCommand((prevArray) => [...prevArray, previousCommand]);
 						parse(previousCommand);
 					}
 
@@ -159,7 +158,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	}, []);
 
 	return (
-		<div className="terminal">
+		<div className="terminal rounded-lg">
 			<div className="console">
 				{Image.map((item) => {
 					return <span>{item}</span>;
