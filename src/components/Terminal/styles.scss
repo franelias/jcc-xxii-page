@@ -1,0 +1,121 @@
+@import "https://fonts.googleapis.com/css?family=Inconsolata";
+
+$background-color: #011304;
+$font-color: #d3c593;
+// d3c593
+
+.terminal {
+  color: $font-color;
+  font-family: Inconsolata, sans-serif, Arial, Helvetica;
+  font-size: 18px;
+  line-height: 1.2;
+  background-color: $background-color;
+  height: 100%;
+  // max-height: 350px;
+}
+.fontColor{
+  color: $font-color;
+
+}
+
+.aboutme {
+  width: 50%;
+  color: rgb(194, 181, 147);
+}
+
+.previousCommands {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+#command {
+  width: 100%;
+  background: none;
+  border: 0px;
+  font-family: Inconsolata, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: $font-color;
+}
+
+.mcq-wrapper {
+  position: relative;
+}
+
+.mcq {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: none;
+}
+
+.mcq-option {
+  padding: 1px;
+  cursor: pointer;
+
+}
+
+.mcq-option:hover a {
+  background-color: #f2f2f2;
+  color: black;
+
+}
+
+.mcq-option:hover {
+  background-color: #f2f2f2;
+  color: black;
+  width: 280px;
+}
+
+a {
+  color: d3c593;
+  text-decoration: none;
+}
+
+.commands {
+  display: flex;
+  gap: 5px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+#skipButton {
+  position: absolute;
+  right: 2%;
+  font-style: italic;
+  color: gray;
+}
+
+.console {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.userPrefix {
+  margin-right: 7px;
+  color: rgb(7, 187, 7);
+}
+
+@media screen and (max-width: 768px) {
+
+  /* CSS rules for mobile devices */
+  #skipButton {
+    font-size: large;
+    position: absolute;
+    bottom: 2%;
+  }
+
+  .terminal {
+    font-size: 16px;
+    height: auto;
+  }
+
+  .aboutme {
+    width: 100%;
+  }
+}
