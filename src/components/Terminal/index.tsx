@@ -59,16 +59,39 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const Image: string[] = [];
 
 	const cursor = "▮";
+
+	const sections = [
+		"Charlas",
+		"FutbolLCC",
+		"NocheDeJuegos",
+		"Fiesta",
+		"Footer",
+	];
 	const [commMessage, setCommMessage] = useState<string>("");
+  const [helpEnable, setHelpEnable] = useState<boolean>(false);
+
 	const generalComms: [string, (arg?: string) => void][] = [
 		[
 			"ls",
-		() => {
-				setCommMessage("");
+			() => {
+				setMessage(sections.join("\n"));
 			},
 		],
-		["show", () => {}],
-		["help", () => {}],
+		[
+			"show",
+			(arg?: string) => {
+				if (arg) {
+					const index = sections.findIndex((section) => section.toLowerCase() === arg.toLocaleLowerCase());
+					if (index === -1) setMessage("bash: " + arg + ": section not found" + "\n");
+          else {
+						setMessage("Loading...");
+						const target = document.getElementById(sections[index]);
+						target?.scrollIntoView({ behavior: "smooth" });
+					} 
+				}
+			},
+		],
+		["help", () => {setHelpEnable(true); setCommMessage("");}],
 	];
 	const linkComms: [string, string][] = [
 		["Youtube", "https://www.youtube.com/channel/UC-CReVEx4-3AfJOH1Tr-udw"],
@@ -91,18 +114,18 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		}
 		setText1("ssh " + userName);
 		setText3("Access Granted!");
+    setHelpEnable(true);
 	}
-	const removeNotFound = () => {
-		document.getElementById("notFound")?.remove();
-	};
+	
+  const setMessage = ( msg: string) => { setCommMessage(msg); setHelpEnable(false); };
 
 	const parse = (command: string) => {
 		const comms = command.split(" ");
-		const cid = generalComms.findIndex((comm) => comm[0] === comms[0]);
-		const lid = linkComms.findIndex((comm) => comm[0] === comms[0]);
+		const cid = generalComms.findIndex((comm) => comm[0].toLowerCase() === comms[0].toLowerCase());
+		const lid = linkComms.findIndex((comm) => comm[0].toLowerCase() === comms[0].toLowerCase());
 		if (lid !== -1) window.open(linkComms[lid][1]);
-		else if (cid !== -1) generalComms[cid][1]();
-		else setCommMessage("bash: " + comms[0] + ": command not found" + "\n");
+		else if (cid !== -1) generalComms[cid][1](comms[1]);
+		else setMessage("bash: " + comms[0] + ": command not found" + "\n");
 	};
 
 	useEffect(() => {
@@ -122,13 +145,11 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					setText2(userName + "'s password:");
 					setText3("Access Granted!");
 				}
-				removeNotFound();
 				const CommandArea = document.getElementById("command");
 				if (CommandArea) {
-					const previousCommand: string = (CommandArea as HTMLInputElement)
-						.value;
+					const previousCommand: string = (CommandArea as HTMLInputElement).value;
 					if (previousCommand !== "") {
-					setprevusedCommand((prevArray) => [...prevArray, previousCommand]);
+						setprevusedCommand((prevArray) => [...prevArray, previousCommand]);
 						parse(previousCommand);
 					}
 
@@ -188,37 +209,24 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					</span>
 				</span>
 				<br />
-				{/* {Text3.includes("Access") ? (
-					Image.map((item) => {
-						return <span>{item}</span>;
-					})
-				) : (
-					<></>
-				)} */}
-				<br />
-				{Text3.includes("Access") ? (
+
+				
+				{helpEnable? (
+          <>
 					<span>
 						<span style={{ color: "skyblue" }}>Available Commands:</span>
 					</span>
-				) : (
-					""
-				)}
-				{Text3.includes("Access") ? (
-					<span>
+          <span>
 						<span style={{ color: "#c9c9c9" }}>General: </span>
 						{generalComms.map((item, index) => {
 							return (
-								<>
+								<span>
 									{index !== generalComms.length - 1 ? item[0] + ", " : item[0]}
-								</>
+								</span>
 							);
 						})}
 					</span>
-				) : (
-					""
-				)}
-				{Text3.includes("Access") ? (
-					<span>
+          	<span>
 						<span style={{ color: "#c9c9c9" }}>Links: </span>
 						{linkComms.map((item, index) => {
 							return (
@@ -226,11 +234,15 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 							);
 						})}
 					</span>
+          <br/>
+          </>
 				) : (
 					""
 				)}
+				
+	
 
-				<br></br>
+				
 				{Text3.includes("Access") ? (
 					<span>Thank you for visiting!◝(ᵔᵕᵔ)◜</span>
 				) : (

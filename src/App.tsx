@@ -73,7 +73,7 @@ const App = () => {
 			<Content>
 				<div className="pl-24 pr-24 pt-12 pb-2">
 					<Terminal />
-					<div className="pt-2">
+					<div className="pt-2" id={"Charlas"} >
 						<div className="flex border-b border-[#e2e5dc] px-4 justify-between">
 							<a onClick={() => setTab(0)} className={clsx("flex flex-col items-center justify-center pb-[13px] pt-4 flex-1", tab === 0 ? "text-[#223611] border-b-[#151711] border-b-[3px]" : "text-[#7a8764]")}>
 								<p className=" text-sm font-bold leading-normal tracking-[0.015em]">Todos los eventos</p>
@@ -229,7 +229,7 @@ const App = () => {
 			<Text className="mt-4"> jcc@fceia.unr.edu.ar</Text>
 		</div> */}
 			</Content>
-			<Footer className="flex flex-row items-center justify-center">
+			<Footer className="flex flex-row items-center justify-center" key={"Footer"}>
 				Facultad de Ciencias Exactas, Ingeniería y Agrimensura. Av. Pellegrini
 				250, Rosario, Santa Fe, República Argentina. Teléfono: (+54) 0341-
 				4802649
