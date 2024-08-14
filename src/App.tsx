@@ -229,7 +229,7 @@ const App = () => {
 			<Text className="mt-4"> jcc@fceia.unr.edu.ar</Text>
 		</div> */}
 			</Content>
-			<Footer className="flex flex-row items-center justify-center" key={"Footer"}>
+			<Footer className="flex flex-row items-center justify-center" id={"Footer"}>
 				Facultad de Ciencias Exactas, Ingeniería y Agrimensura. Av. Pellegrini
 				250, Rosario, Santa Fe, República Argentina. Teléfono: (+54) 0341-
 				4802649
