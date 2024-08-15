@@ -70,12 +70,13 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const [commMessage, setCommMessage] = useState<string>("");
   const [helpEnable, setHelpEnable] = useState<boolean>(false);
 
-	const generalComms: [string, (arg?: string) => void][] = [
+	const generalComms: [string, (arg?: string) => void, string][] = [
 		[
 			"ls",
 			() => {
 				setMessage(sections.join("\n"));
 			},
+      "ls: List all available sections",
 		],
 		[
 			"show",
@@ -90,9 +91,16 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					} 
 				}
 			},
+      "show <section>: show a specific section",
 		],
-		["help", () => {setHelpEnable(true); setCommMessage("");}],
-	];
+		["help", () => {setHelpEnable(true); setCommMessage("");}, "help: Show available commands and links. The laters will be opened in a new tab"],
+    ["man", (arg?: string) => {
+      if(arg){
+        const index = generalComms.findIndex((comm) => comm[0].toLowerCase() === arg.toLowerCase());
+        if(index === -1) setMessage("bash: " + arg + ": command not found" + "\n");
+        else setMessage(generalComms[index][2]);
+      }}, "man <command>: show the manual for a specific command"
+	]];
 	const linkComms: [string, string][] = [
 		["Youtube", "https://www.youtube.com/channel/UC-CReVEx4-3AfJOH1Tr-udw"],
 		["Instagram", "https://www.instagram.com/jccfceia"],
