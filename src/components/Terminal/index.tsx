@@ -179,7 +179,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	}, []);
 
 	return (
-		<div className="terminal rounded-lg">
+		<div className="terminal rounded-lg hidden md:block">
 			<div className="console">
 				{Image.map((item) => {
 					return <span>{item}</span>;

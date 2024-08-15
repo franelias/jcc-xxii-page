@@ -71,42 +71,48 @@ const App = () => {
 			<Header />
 
 			<Content>
-				<div className="pl-24 pr-24 pt-12 pb-2">
+				<div className="pl-4 pr-4 pb-2 md:pl-24 md:pr-24 md:pt-12 md:pb-2">
 					<Terminal />
 					<div className="pt-2" id={"Charlas"} >
 						<div className="flex border-b border-[#e2e5dc] px-4 justify-between">
 							<a onClick={() => setTab(0)} className={clsx("flex flex-col items-center justify-center pb-[13px] pt-4 flex-1", tab === 0 ? "text-[#223611] border-b-[#151711] border-b-[3px]" : "text-[#7a8764]")}>
-								<p className=" text-sm font-bold leading-normal tracking-[0.015em]">Todos los eventos</p>
+								<p className="text-center text-sm font-bold leading-normal tracking-[0.015em]">Todos los eventos</p>
 							</a>
 							<a onClick={() => setTab(1)} className={clsx("flex flex-col items-center justify-center pb-[13px] pt-4 flex-1", tab === 1 ? "text-[#223611] border-b-[#151711] border-b-[3px]" : "text-[#7a8764]")}>
-								<p className="text-sm font-bold leading-normal tracking-[0.015em]">Miercoles 23</p>
+								<p className="text-center text-sm font-bold leading-normal tracking-[0.015em]">Miercoles 23</p>
 							</a>
 							<a onClick={() => setTab(2)} className={clsx("flex flex-col items-center justify-center pb-[13px] pt-4 flex-1", tab === 2 ? "text-[#151711] border-b-[#151711] border-b-[3px]" : "text-[#7a8764]")}>
-								<p className="text-sm font-bold leading-normal tracking-[0.015em]">Jueves 24</p>
+								<p className="text-center text-sm font-bold leading-normal tracking-[0.015em]">Jueves 24</p>
 							</a>
 							<a onClick={() => setTab(3)} className={clsx("flex flex-col items-center justify-center pb-[13px] pt-4 flex-1", tab === 3 ? "text-[#151711] border-b-[#151711] border-b-[3px]" : "text-[#7a8764]")}>
-								<p className="text-sm font-bold leading-normal tracking-[0.015em]">Viernes 25</p>
+								<p className="text-center text-sm font-bold leading-normal tracking-[0.015em]">Viernes 25</p>
 							</a>
 						</div>
 						<h2 className="text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Today</h2>
 						<Item title="Fulbo" subtitle="11:00 AM - 12:00 PM" />
 						<Item title="Fulbo" subtitle="11:00 AM - 12:00 PM" />
 					</div>
-					<div className="flex gap-6 px-4 py-10">
+
+					<div className="flex py-10 flex-col md:flex-row justify-center items-center group hover:bg-green">
 						<div
-							className="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl "
-							style={{ backgroundImage: "url('src/assets/remeras.png')" }}
-						></div>
-						<div className="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center items-center">
+							className="w-full  bg-no-repeat bg-cover rounded-xl group-hover:blur-sm"
+							style={{ backgroundImage: "url('src/assets/remeras.png')", aspectRatio: "4", backgroundPositionY: "32%" }}
+						>
+						</div>
+
+						<div className="gap-6 max-w-[700px] items-center justify-center absolute w-full">
 							<div className="flex flex-col gap-2 text-center">
 								<h1
-									className="text-[#151711] text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+									className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
 								>
-									Limited Edition Cal Week T-shirt
+									Remera JCC XXII
 								</h1>
-								<h2 className="text-[#151711] text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-									Get your hands on our exclusive Cal Week T-shirt. Designed by our talented students, this shirt is a must-have for all Golden Bears.
+								<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
+									¡La remera oficial de las jornadas de ciencia de la computacion te está esperando! Con un diseño inspirado en una tematica retro, vas a estar a la moda y demostrando que sos un verdadero crack de la programación. ¡No te la pierdas!
 								</h2>
+								<a className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal cursor-default">
+									¡Reserva la tuya haciendo click aca!
+								</a>
 							</div>
 						</div>
 					</div>
