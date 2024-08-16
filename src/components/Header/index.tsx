@@ -25,7 +25,7 @@ const Header: React.FC = () => {
         >
             <div className="mr-4">JCC 2024</div>
 
-            <div className="flex c">
+            {/* <div className="flex c">
                 <span className="transition-colors mr-4 hover:text-pink-700">
                     <Link url="https://www.instagram.com/jccfceia">
                         <BiLogoInstagram className="hover:text-pink-700" size={24} />
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
                         <BiLogoYoutube className="hover:text-pink-700" size={24} />
                     </Link>
                 </span>
-            </div>
+            </div> */}
 
         </Header>
     );

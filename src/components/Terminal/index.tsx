@@ -68,7 +68,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		"Footer",
 	];
 	const [commMessage, setCommMessage] = useState<string>("");
-  const [helpEnable, setHelpEnable] = useState<boolean>(false);
+	const [helpEnable, setHelpEnable] = useState<boolean>(false);
 
 	const generalComms: [string, (arg?: string) => void, string][] = [
 		[
@@ -76,7 +76,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 			() => {
 				setMessage(sections.join("\n"));
 			},
-      "ls: List all available sections",
+			"ls: List all available sections",
 		],
 		[
 			"show",
@@ -84,23 +84,24 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				if (arg) {
 					const index = sections.findIndex((section) => section.toLowerCase() === arg.toLocaleLowerCase());
 					if (index === -1) setMessage("bash: " + arg + ": section not found" + "\n");
-          else {
+					else {
 						setMessage("Loading...");
 						const target = document.getElementById(sections[index]);
 						target?.scrollIntoView({ behavior: "smooth" });
-					} 
+					}
 				}
 			},
-      "show <section>: show a specific section",
+			"show <section>: show a specific section",
 		],
-		["help", () => {setHelpEnable(true); setCommMessage("");}, "help: Show available commands and links. The laters will be opened in a new tab"],
-    ["man", (arg?: string) => {
-      if(arg){
-        const index = generalComms.findIndex((comm) => comm[0].toLowerCase() === arg.toLowerCase());
-        if(index === -1) setMessage("bash: " + arg + ": command not found" + "\n");
-        else setMessage(generalComms[index][2]);
-      }}, "man <command>: show the manual for a specific command"
-	]];
+		["help", () => { setHelpEnable(true); setCommMessage(""); }, "help: Show available commands and links. The laters will be opened in a new tab"],
+		["man", (arg?: string) => {
+			if (arg) {
+				const index = generalComms.findIndex((comm) => comm[0].toLowerCase() === arg.toLowerCase());
+				if (index === -1) setMessage("bash: " + arg + ": command not found" + "\n");
+				else setMessage(generalComms[index][2]);
+			}
+		}, "man <command>: show the manual for a specific command"
+		]];
 	const linkComms: [string, string][] = [
 		["Youtube", "https://www.youtube.com/channel/UC-CReVEx4-3AfJOH1Tr-udw"],
 		["Instagram", "https://www.instagram.com/jccfceia"],
@@ -111,21 +112,21 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const [prevusedCommand, setprevusedCommand] = useState<string[]>([]);
 
 	function SkipIntro() {
-		let id = setTimeout(() => {}, 0) as unknown as number;
+		let id = setTimeout(() => { }, 0) as unknown as number;
 		while (id--) {
 			clearTimeout(id);
 		}
 
-		id = setInterval(() => {}, 0) as unknown as number;
+		id = setInterval(() => { }, 0) as unknown as number;
 		while (id--) {
 			clearInterval(id);
 		}
 		setText1("ssh " + userName);
 		setText3("Access Granted!");
-    setHelpEnable(true);
+		setHelpEnable(true);
 	}
-	
-  const setMessage = ( msg: string) => { setCommMessage(msg); setHelpEnable(false); };
+
+	const setMessage = (msg: string) => { setCommMessage(msg); setHelpEnable(false); };
 
 	const parse = (command: string) => {
 		const comms = command.split(" ");
@@ -140,12 +141,12 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		document.addEventListener("keydown", function (event) {
 			if (event.key === "Enter") {
 				if (!Text3.includes("Access")) {
-					let id: number = setTimeout(() => {}, 0) as unknown as number;
+					let id: number = setTimeout(() => { }, 0) as unknown as number;
 					while (id--) {
 						clearTimeout(id);
 					}
 
-					id = setInterval(() => {}, 0) as unknown as number;
+					id = setInterval(() => { }, 0) as unknown as number;
 					while (id--) {
 						clearInterval(id);
 					}
@@ -187,7 +188,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	}, []);
 
 	return (
-		<div className="terminal rounded-lg hidden md:block">
+		<div className="terminal rounded-lg hidden md:block h-[600px]">
 			<div className="console">
 				{Image.map((item) => {
 					return <span>{item}</span>;
@@ -218,41 +219,49 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				</span>
 				<br />
 
-				
-				{helpEnable? (
-          <>
-					<span>
-						<span style={{ color: "skyblue" }}>Available Commands:</span>
-					</span>
-          <span>
-						<span style={{ color: "#c9c9c9" }}>General: </span>
-						{generalComms.map((item, index) => {
-							return (
-								<span>
-									{index !== generalComms.length - 1 ? item[0] + ", " : item[0]}
-								</span>
-							);
-						})}
-					</span>
-          	<span>
-						<span style={{ color: "#c9c9c9" }}>Links: </span>
-						{linkComms.map((item, index) => {
-							return (
-								<>{index !== linkComms.length - 1 ? item[0] + ", " : item[0]}</>
-							);
-						})}
-					</span>
-          <br/>
-          </>
+
+				{helpEnable ? (
+					<>
+						<span>
+							<span style={{ color: "skyblue" }}>Available Commands:</span>
+						</span>
+						<span>
+							<span style={{ color: "#c9c9c9" }}>General: </span>
+							{generalComms.map((item, index) => {
+								return (
+									<span>
+										{index !== generalComms.length - 1 ? item[0] + ", " : item[0]}
+									</span>
+								);
+							})}
+						</span>
+						<span>
+							<span style={{ color: "#c9c9c9" }}>Links: </span>
+							{linkComms.map((item, index) => {
+								return (
+									<>{index !== linkComms.length - 1 ? item[0] + ", " : item[0]}</>
+								);
+							})}
+						</span>
+						<br />
+					</>
 				) : (
 					""
 				)}
-				
-	
 
-				
+
+
+
 				{Text3.includes("Access") ? (
-					<span>Thank you for visiting!◝(ᵔᵕᵔ)◜</span>
+					<>
+						<h1
+							className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+						>
+							Vuelven las JCC!
+						</h1>
+						<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
+							Las Jornadas de Ciencias de la Computación vuelven los días 23, 24 y 25 de Octubre. Contaremos con la presencia de destacados expositores de distintas localidades argentinas, que están radicados en diferentes partes del mundo. Las charlas se realizarán en el salón de actos de la Facultad de Ciencias Exactas, Ingeniería y Agrimensura, además de actividades y talleres abiertos para todos los asistentes. También estaremos difundiendo más información en la cuenta de Instagram de las JCC.
+						</h2></>
 				) : (
 					""
 				)}
