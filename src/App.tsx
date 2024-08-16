@@ -39,11 +39,11 @@ const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
 		</div>)
 }
 
-const HoverCard = ({ url, title, subtitle, link, fit = false }: { url: string; title?: string; subtitle?: string; link?: string, fit?: bool }) => {
+const HoverCard = ({ url, title, subtitle, link, fit = false }: { url: string; title?: string; subtitle?: string; link?: string, fit?: boolean }) => {
 	return (
-		<div className="relative overflow-hidden rounded-lg bg-white group w-full h-full">
+		<div className="relative overflow-hidden rounded-lg bg-white group w-full h-full shadow-lg">
 			<div
-				className={clsx("flex w-full bg-no-repeat rounded-xl group-hover:blur-sm h-[250px]", fit ? "bg-contain bg-center" : "bg-cover")}
+				className={clsx("flex w-full bg-no-repeat rounded-xl group-hover:blur-sm h-[250px] ", fit ? "bg-contain bg-center" : "bg-cover")}
 				style={{ backgroundImage: "url('" + url + "')", backgroundPositionY: fit ? "50%" : "35%" }}
 			>
 			</div>
