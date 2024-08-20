@@ -67,14 +67,21 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		"Fiesta",
 		"Footer",
 	];
-	const [commMessage, setCommMessage] = useState<string>("");
-	const [helpEnable, setHelpEnable] = useState<boolean>(false);
+	const [endIntro, setEndIntro] = useState<boolean>(false);
+  const [introEnabled, setIntroEnabled] = useState<boolean>(true);
+  const disableMsg = () => {setEndIntro(false); setIntroEnabled(false);};
 
-	const generalComms: [string, (arg?: string) => void, string][] = [
+	const generalComms: [string, (arg?: string) => JSX.Element, string][] = [
 		[
 			"ls",
 			() => {
-				setMessage(sections.join("\n"));
+				return (
+					<ul>
+						{sections.map((item) => {
+							return <li>{item}</li>;
+						})}
+					</ul>
+				);
 			},
 			"ls: List all available sections",
 		],
@@ -82,71 +89,123 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 			"show",
 			(arg?: string) => {
 				if (arg) {
-					const index = sections.findIndex((section) => section.toLowerCase() === arg.toLocaleLowerCase());
-					if (index === -1) setMessage("bash: " + arg + ": section not found" + "\n");
+					const index = sections.findIndex(
+						(section) => section.toLowerCase() === arg.toLocaleLowerCase()
+					);
+					if (index === -1)
+						return notFound(arg);
 					else {
-						setMessage("Loading...");
+						
 						const target = document.getElementById(sections[index]);
 						target?.scrollIntoView({ behavior: "smooth" });
+            return <>Loading...</>;
 					}
 				}
+        return <></>;
 			},
 			"show <section>: show a specific section",
 		],
-		["help", () => { setHelpEnable(true); setCommMessage(""); }, "help: Show available commands and links. The laters will be opened in a new tab"],
-		["man", (arg?: string) => {
-			if (arg) {
-				const index = generalComms.findIndex((comm) => comm[0].toLowerCase() === arg.toLowerCase());
-				if (index === -1) setMessage("bash: " + arg + ": command not found" + "\n");
-				else setMessage(generalComms[index][2]);
-			}
-		}, "man <command>: show the manual for a specific command"
-		]];
+		[
+			"help",
+			() => {
+				return <>{help()}</>;
+			},
+			"help: Show available commands and links. The laters will be opened in a new tab",
+		],
+		[
+			"man",
+			(arg?: string) => {
+				if (arg) {
+					const index = generalComms.findIndex(
+						(comm) => comm[0].toLowerCase() === arg.toLowerCase()
+					);
+					if (index === -1)
+						return notFound(arg)
+					else return <li> {generalComms[index][2]}</li>;
+				}
+        return <></>;
+			},
+			"man <command>: show the manual for a specific command",
+		],
+	];
 	const linkComms: [string, string][] = [
 		["Youtube", "https://www.youtube.com/channel/UC-CReVEx4-3AfJOH1Tr-udw"],
 		["Instagram", "https://www.instagram.com/jccfceia"],
 		["etc.", ""],
 	];
 	const userName = "jcc@dcc.fceia.unr.edu.ar";
+	const notFound = (arg: string) => {return <> {"bash: " + arg + ": command not found" + "\n"} </>;};
+	const help = () => {
+		return (
+			<>
+				<span>
+					<span style={{ color: "skyblue" }}>Available Commands:</span>
+				</span>
+				<li>
+					<span style={{ color: "#c9c9c9" }}>General: </span>
+					{generalComms.map((item, index) => {
+						return (
+							<span>
+								{index !== generalComms.length - 1 ? item[0] + ", " : item[0]}
+							</span>
+						);
+					})}
+				</li>
+				<li>
+					<span style={{ color: "#c9c9c9" }}>Links: </span>
+					{linkComms.map((item, index) => {
+						return (
+							<>{index !== linkComms.length - 1 ? item[0] + ", " : item[0]}</>
+						);
+					})}
+				</li>
+				<br />
+			</>
+		);
+	};
 
-	const [prevusedCommand, setprevusedCommand] = useState<string[]>([]);
+	const [prevusedCommand, setprevusedCommand] = useState<[string, JSX.Element][]>([]);
 
 	function SkipIntro() {
-		let id = setTimeout(() => { }, 0) as unknown as number;
+		let id = setTimeout(() => {}, 0) as unknown as number;
 		while (id--) {
 			clearTimeout(id);
 		}
 
-		id = setInterval(() => { }, 0) as unknown as number;
+		id = setInterval(() => {}, 0) as unknown as number;
 		while (id--) {
 			clearInterval(id);
 		}
 		setText1("ssh " + userName);
 		setText3("Access Granted!");
-		setHelpEnable(true);
+    setEndIntro(true);
 	}
-
-	const setMessage = (msg: string) => { setCommMessage(msg); setHelpEnable(false); };
 
 	const parse = (command: string) => {
 		const comms = command.split(" ");
-		const cid = generalComms.findIndex((comm) => comm[0].toLowerCase() === comms[0].toLowerCase());
-		const lid = linkComms.findIndex((comm) => comm[0].toLowerCase() === comms[0].toLowerCase());
+		const cid = generalComms.findIndex(
+			(comm) => comm[0].toLowerCase() === comms[0].toLowerCase()
+		);
+		const lid = linkComms.findIndex(
+			(comm) => comm[0].toLowerCase() === comms[0].toLowerCase()
+		);
 		if (lid !== -1) window.open(linkComms[lid][1]);
-		else if (cid !== -1) generalComms[cid][1](comms[1]);
-		else setMessage("bash: " + comms[0] + ": command not found" + "\n");
+		else if (cid !== -1) return generalComms[cid][1](comms[1]);
+		else return notFound(comms[0]);
+
+		return <></>;
 	};
 
-	useEffect(() => {
-		document.addEventListener("keydown", function (event) {
-			if (event.key === "Enter") {
+  const inputHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const key = e.key
+    if (key === "Enter") {
 				if (!Text3.includes("Access")) {
-					let id: number = setTimeout(() => { }, 0) as unknown as number;
+					let id: number = setTimeout(() => {}, 0) as unknown as number;
 					while (id--) {
 						clearTimeout(id);
 					}
 
-					id = setInterval(() => { }, 0) as unknown as number;
+					id = setInterval(() => {}, 0) as unknown as number;
 					while (id--) {
 						clearInterval(id);
 					}
@@ -155,18 +214,34 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					setText3("Access Granted!");
 				}
 				const CommandArea = document.getElementById("command");
+
 				if (CommandArea) {
 					const previousCommand: string = (CommandArea as HTMLInputElement).value;
 					if (previousCommand !== "") {
-						setprevusedCommand((prevArray) => [...prevArray, previousCommand]);
-						parse(previousCommand);
+						setprevusedCommand( prevusedCommand =>
+              [ ... prevusedCommand,[previousCommand, parse(previousCommand)]]);
 					}
 
 					(CommandArea as HTMLInputElement).value = "";
 				}
 			}
-		});
 
+    }
+
+  const keyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if(event.key === "Enter")
+      {
+        const Terminal = document.getElementById("Terminal");
+        if(Terminal && Terminal.scrollHeight > Terminal.offsetHeight)
+          if(introEnabled)
+            disableMsg();
+          else
+            setprevusedCommand( prevusedCommand =>[ ...prevusedCommand.slice(1)]);
+      }
+
+  }
+	useEffect(() => {
+    
 		Typewriter("ssh " + userName, 100, setText1);
 
 		setTimeout(() => {
@@ -184,16 +259,19 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		setTimeout(() => {
 			setText2(userName + "'s password:");
 			setText3("> Access granted.");
+      setEndIntro(true);
 		}, 7300);
+
 	}, []);
 
 	return (
-		<div className="terminal rounded-lg hidden md:block h-[600px]">
+		<div className="terminal rounded-lg hidden md:block h-[500px]" id="Terminal">
 			<div className="console">
 				{Image.map((item) => {
 					return <span>{item}</span>;
 				})}
-
+        {introEnabled ? 
+          <>
 				<span className="userPrefix">
 					user@localhost:~\
 					<span style={{ marginLeft: "8px" }} className="fontColor">
@@ -202,99 +280,73 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					</span>
 				</span>
 
-				{Text3.includes("Access") ? (
-					""
+				{endIntro ? (
+					<>
+            {Text2}
+          </>
 				) : (
 					<span id="skipButton" onClick={SkipIntro}>
 						Press Enter or Click Here to Skip
 					</span>
 				)}
-				{Text2}
+				
 				<span>
 					{" "}
-					{Text4}{" "}
-					<span style={{ color: Text3.includes("Access") ? "yellow" : "" }}>
-						{Text3}
-					</span>
+					{Text4} <span style={{ color: endIntro ? "yellow" : "" }}>{Text3}</span>
 				</span>
 				<br />
 
-
-				{helpEnable ? (
-					<>
-						<span>
-							<span style={{ color: "skyblue" }}>Available Commands:</span>
-						</span>
-						<span>
-							<span style={{ color: "#c9c9c9" }}>General: </span>
-							{generalComms.map((item, index) => {
-								return (
-									<span>
-										{index !== generalComms.length - 1 ? item[0] + ", " : item[0]}
-									</span>
-								);
-							})}
-						</span>
-						<span>
-							<span style={{ color: "#c9c9c9" }}>Links: </span>
-							{linkComms.map((item, index) => {
-								return (
-									<>{index !== linkComms.length - 1 ? item[0] + ", " : item[0]}</>
-								);
-							})}
-						</span>
-						<br />
-					</>
-				) : (
-					""
-				)}
-
-
-
-
-				{Text3.includes("Access") ? (
-					<>
-						<h1
-							className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
-						>
+				{endIntro ? 
+        <>
+        
+          <ul>{help()}</ul>
+          
+						<h1 className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
 							Vuelven las JCC!
 						</h1>
 						<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
-							Las Jornadas de Ciencias de la Computación vuelven los días 23, 24 y 25 de Octubre. Contaremos con la presencia de destacados expositores de distintas localidades argentinas, que están radicados en diferentes partes del mundo. Las charlas se realizarán en el salón de actos de la Facultad de Ciencias Exactas, Ingeniería y Agrimensura, además de actividades y talleres abiertos para todos los asistentes. También estaremos difundiendo más información en la cuenta de Instagram de las JCC.
-						</h2></>
-				) : (
-					""
-				)}
-				<br></br>
-				<ul className="previousCommands" id="console23">
-					{commMessage !== "" ? (
-						<div key={"commRes"}>{commMessage}</div>
-					) : (
-						<></>
-					)}
+							Las Jornadas de Ciencias de la Computación vuelven los días 23, 24
+							y 25 de Octubre. Contaremos con la presencia de destacados
+							expositores de distintas localidades argentinas, que están
+							radicados en diferentes partes del mundo. Las charlas se
+							realizarán en el salón de actos de la Facultad de Ciencias
+							Exactas, Ingeniería y Agrimensura, además de actividades y
+							talleres abiertos para todos los asistentes. También estaremos
+							difundiendo más información en la cuenta de Instagram de las JCC.
+						</h2>
+					
+        </> : ""}
 
-					{/* {
-						prevusedCommand.length === 0 ? (
-							<></>
-						) : prevusedCommand[prevusedCommand.length - 1] === "comm1" ? (
-							<>aaaa</>
-						) : (
-						)
-						// prevusedCommand.map((item, index) => {
-						// 	return (
-						// <div>
-						// 	<li key={index}>{item}</li>
-						// 	bash: {item.replace(userName + ":~\\", "")}: command not found
-						// </div>
-						// 	);
-						// })
-					} */}
-					{/* {console.log(prevusedCommand)} */}
+				<br></br>
+          </>
+        : ""
+        }
+				<ul className="previousCommands" id="console23">
+
+					{prevusedCommand.length === 0 ? (
+						<></>
+					) : (
+						prevusedCommand.map((item, index) => {
+							return (
+								<>
+									<li key={index}>
+										<span className="commands">
+											<span className="userPrefix">{userName}:~\</span>
+											{item[0]}
+										</span>
+									</li>
+									{item[1]}
+								</>
+							);
+						})
+					)}
+					{/* {console.log(prevusedCommand, prevusedCommand.length)} */}
 				</ul>
+        {/* {console.log(intro)} */}
 				{Text3.includes("Access") ? (
 					<span className="commands">
 						<span className="userPrefix">{userName}:~\</span>{" "}
-						<input type="text" id="command" name="command" autoFocus></input>
+						<input type="text" id="command" name="command" autoFocus onKeyDown={inputHandler} onKeyUp={keyUpHandler}></input>
 					</span>
 				) : (
 					""
