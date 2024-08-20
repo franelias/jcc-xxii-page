@@ -83,7 +83,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					</ul>
 				);
 			},
-			"ls: List all available sections",
+			"ls: Muestra todas las secciones disponibles",
 		],
 		[
 			"show",
@@ -96,20 +96,22 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 						return notFound(arg);
 					else {
 						const target = document.getElementById(sections[index]);
-						target?.scrollIntoView({ behavior: "smooth" });
+            console.log(target?.getBoundingClientRect())
+            window.scrollTo({top: target?.getBoundingClientRect().top, behavior: "smooth"});
+						
 						return <>Loading...</>;
 					}
 				}
 				return <></>;
 			},
-			"show <section>: show a specific section",
+			"show <section>: te lleva a la sección especificada",
 		],
 		[
 			"help",
 			() => {
 				return <>{help()}</>;
 			},
-			"help: Show available commands and links. The laters will be opened in a new tab",
+			"help: Muestra los comandos y links disponibles. Cabe destacar que al escribir un link, este se abrirá en una nueva pestaña.",
 		],
 		[
 			"man",
@@ -124,7 +126,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				}
 				return <></>;
 			},
-			"man <command>: show the manual for a specific command",
+			"man <command>: Muestra la descripción de un comando",
 		],
 	];
 	const linkComms: [string, string][] = [
@@ -133,7 +135,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		["etc.", ""],
 	];
 	const userName = "jcc@dcc.fceia.unr.edu.ar";
-	const notFound = (arg: string) => { return <> {"bash: " + arg + ": command not found" + "\n"} </>; };
+	const notFound = (arg: string) => { return <> {"bash: " + arg + ": comando no encontrado" + "\n"} </>; };
 	const help = () => {
 		return (
 			<>
@@ -176,7 +178,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 			clearInterval(id);
 		}
 		setText1("ssh " + userName);
-		setText3("Logged In!");
+		setText3("Conectado.");
 		setEndIntro(true);
 	}
 
@@ -210,7 +212,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				}
 				setText1("ssh " + userName);
 				setText2(userName + "'s password:");
-				setText3("Logged In!");
+				setText3("Conectado!");
 			}
 			const CommandArea = document.getElementById("command");
 
@@ -219,6 +221,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				if (previousCommand !== "") {
 					setprevusedCommand(prevusedCommand =>
 						[...prevusedCommand, [previousCommand, parse(previousCommand)]]);
+          
 				}
 
 				(CommandArea as HTMLInputElement).value = "";
@@ -228,13 +231,10 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	}
 
 	const keyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.key === "Enter") {
+    if (event.key === "Enter") {
 			const Terminal = document.getElementById("Terminal");
-			if (Terminal && Terminal.scrollHeight > Terminal.offsetHeight)
-				if (introEnabled)
-					disableMsg();
-			// else
-			// 	setprevusedCommand(prevusedCommand => [...prevusedCommand.slice(1)]);
+      if(Terminal)
+        Terminal.scrollTop = Terminal.scrollHeight;
 		}
 	}
 
@@ -281,8 +281,8 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 								{Text2}
 							</>
 						) : (
-							<span id="skipButton" onClick={SkipIntro}>
-								Press Enter or Click Here to Skip
+							<span id="skipButton" onClick={SkipIntro} >
+                Aprete Enter o Click Aquí para Saltear
 							</span>
 						)}
 
@@ -295,8 +295,8 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 						{endIntro ?
 							<>
 
-								<ul>{help()}</ul>
-
+			
+                
 								<h1 className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
 									Vuelven las JCC!
 								</h1>
@@ -310,7 +310,15 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 									talleres abiertos para todos los asistentes. También estaremos
 									difundiendo más información en la cuenta de Instagram de las JCC.
 								</h2>
-
+                <br/>
+					      <ul>
+                  <li key={"helpIntro"}>
+										<span className="commands">
+											<span className="userPrefix">{userName}:~\</span>
+											help
+										</span>
+									</li>
+                  {help()}</ul>
 							</> : ""}
 
 						<br></br>
@@ -339,7 +347,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					{/* {console.log(prevusedCommand, prevusedCommand.length)} */}
 				</ul>
 				{/* {console.log(intro)} */}
-				{Text3.includes("Access") ? (
+				{endIntro ? (
 					<span className="commands">
 						<span className="userPrefix">{userName}:~\</span>{" "}
 						<input type="text" id="command" name="command" autoFocus onKeyDown={inputHandler} onKeyUp={keyUpHandler}></input>
