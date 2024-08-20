@@ -1,12 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
-import {
-    BiLogoInstagram,
-    BiLogoYoutube,
-} from "react-icons/bi";
 
 import "./styles.scss"
-import Link from "../Link";
 
 const Header: React.FC = () => {
     const { Header } = Layout;
@@ -23,7 +18,7 @@ const Header: React.FC = () => {
                 alignItems: 'center',
             }}
         >
-            <div className="mr-4">JCC 2024</div>
+            <div className="mr-4">Jornadas de Ciencias de la Computación 2024</div>
 
             {/* <div className="flex c">
                 <span className="transition-colors mr-4 hover:text-pink-700">

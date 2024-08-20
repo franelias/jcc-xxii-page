@@ -68,8 +68,8 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		"Footer",
 	];
 	const [endIntro, setEndIntro] = useState<boolean>(false);
-  const [introEnabled, setIntroEnabled] = useState<boolean>(true);
-  const disableMsg = () => {setEndIntro(false); setIntroEnabled(false);};
+	const [introEnabled, setIntroEnabled] = useState<boolean>(true);
+	const disableMsg = () => { setEndIntro(false); setIntroEnabled(false); };
 
 	const generalComms: [string, (arg?: string) => JSX.Element, string][] = [
 		[
@@ -95,13 +95,12 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					if (index === -1)
 						return notFound(arg);
 					else {
-						
 						const target = document.getElementById(sections[index]);
 						target?.scrollIntoView({ behavior: "smooth" });
-            return <>Loading...</>;
+						return <>Loading...</>;
 					}
 				}
-        return <></>;
+				return <></>;
 			},
 			"show <section>: show a specific section",
 		],
@@ -123,7 +122,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 						return notFound(arg)
 					else return <li> {generalComms[index][2]}</li>;
 				}
-        return <></>;
+				return <></>;
 			},
 			"man <command>: show the manual for a specific command",
 		],
@@ -134,12 +133,12 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		["etc.", ""],
 	];
 	const userName = "jcc@dcc.fceia.unr.edu.ar";
-	const notFound = (arg: string) => {return <> {"bash: " + arg + ": command not found" + "\n"} </>;};
+	const notFound = (arg: string) => { return <> {"bash: " + arg + ": command not found" + "\n"} </>; };
 	const help = () => {
 		return (
 			<>
 				<span>
-					<span style={{ color: "skyblue" }}>Available Commands:</span>
+					<span style={{ color: "skyblue" }}>Comandos disponibles:</span>
 				</span>
 				<li>
 					<span style={{ color: "#c9c9c9" }}>General: </span>
@@ -167,18 +166,18 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const [prevusedCommand, setprevusedCommand] = useState<[string, JSX.Element][]>([]);
 
 	function SkipIntro() {
-		let id = setTimeout(() => {}, 0) as unknown as number;
+		let id = setTimeout(() => { }, 0) as unknown as number;
 		while (id--) {
 			clearTimeout(id);
 		}
 
-		id = setInterval(() => {}, 0) as unknown as number;
+		id = setInterval(() => { }, 0) as unknown as number;
 		while (id--) {
 			clearInterval(id);
 		}
 		setText1("ssh " + userName);
-		setText3("Access Granted!");
-    setEndIntro(true);
+		setText3("Logged In!");
+		setEndIntro(true);
 	}
 
 	const parse = (command: string) => {
@@ -196,52 +195,50 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		return <></>;
 	};
 
-  const inputHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const key = e.key
-    if (key === "Enter") {
-				if (!Text3.includes("Access")) {
-					let id: number = setTimeout(() => {}, 0) as unknown as number;
-					while (id--) {
-						clearTimeout(id);
-					}
-
-					id = setInterval(() => {}, 0) as unknown as number;
-					while (id--) {
-						clearInterval(id);
-					}
-					setText1("ssh " + userName);
-					setText2(userName + "'s password:");
-					setText3("Access Granted!");
+	const inputHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		const key = e.key
+		if (key === "Enter") {
+			if (!Text3.includes("Access")) {
+				let id: number = setTimeout(() => { }, 0) as unknown as number;
+				while (id--) {
+					clearTimeout(id);
 				}
-				const CommandArea = document.getElementById("command");
 
-				if (CommandArea) {
-					const previousCommand: string = (CommandArea as HTMLInputElement).value;
-					if (previousCommand !== "") {
-						setprevusedCommand( prevusedCommand =>
-              [ ... prevusedCommand,[previousCommand, parse(previousCommand)]]);
-					}
-
-					(CommandArea as HTMLInputElement).value = "";
+				id = setInterval(() => { }, 0) as unknown as number;
+				while (id--) {
+					clearInterval(id);
 				}
+				setText1("ssh " + userName);
+				setText2(userName + "'s password:");
+				setText3("Logged In!");
 			}
+			const CommandArea = document.getElementById("command");
 
-    }
+			if (CommandArea) {
+				const previousCommand: string = (CommandArea as HTMLInputElement).value;
+				if (previousCommand !== "") {
+					setprevusedCommand(prevusedCommand =>
+						[...prevusedCommand, [previousCommand, parse(previousCommand)]]);
+				}
 
-  const keyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if(event.key === "Enter")
-      {
-        const Terminal = document.getElementById("Terminal");
-        if(Terminal && Terminal.scrollHeight > Terminal.offsetHeight)
-          if(introEnabled)
-            disableMsg();
-          else
-            setprevusedCommand( prevusedCommand =>[ ...prevusedCommand.slice(1)]);
-      }
+				(CommandArea as HTMLInputElement).value = "";
+			}
+		}
 
-  }
+	}
+
+	const keyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter") {
+			const Terminal = document.getElementById("Terminal");
+			if (Terminal && Terminal.scrollHeight > Terminal.offsetHeight)
+				if (introEnabled)
+					disableMsg();
+			// else
+			// 	setprevusedCommand(prevusedCommand => [...prevusedCommand.slice(1)]);
+		}
+	}
+
 	useEffect(() => {
-    
 		Typewriter("ssh " + userName, 100, setText1);
 
 		setTimeout(() => {
@@ -253,74 +250,73 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		}, 4300);
 
 		setTimeout(() => {
-			setText3("Connecting to " + userName + "...");
+			setText3("Conectandose a " + userName + "...");
 		}, 4300);
 
 		setTimeout(() => {
 			setText2(userName + "'s password:");
-			setText3("> Access granted.");
-      setEndIntro(true);
+			setText3("> Conectado.");
+			setEndIntro(true);
 		}, 7300);
-
 	}, []);
 
 	return (
-		<div className="terminal rounded-lg hidden md:block h-[500px]" id="Terminal">
+		<div className="terminal rounded-lg hidden md:block h-[500px]" id="Terminal" style={{ overflow: 'scroll' }}>
 			<div className="console">
 				{Image.map((item) => {
 					return <span>{item}</span>;
 				})}
-        {introEnabled ? 
-          <>
-				<span className="userPrefix">
-					user@localhost:~\
-					<span style={{ marginLeft: "8px" }} className="fontColor">
-						{Text1}
-						{Text1.length === userName.length + 4 ? "" : cursor}
-					</span>
-				</span>
-
-				{endIntro ? (
+				{introEnabled ?
 					<>
-            {Text2}
-          </>
-				) : (
-					<span id="skipButton" onClick={SkipIntro}>
-						Press Enter or Click Here to Skip
-					</span>
-				)}
-				
-				<span>
-					{" "}
-					{Text4} <span style={{ color: endIntro ? "yellow" : "" }}>{Text3}</span>
-				</span>
-				<br />
+						<span className="userPrefix">
+							user@localhost:~\
+							<span style={{ marginLeft: "8px" }} className="fontColor">
+								{Text1}
+								{Text1.length === userName.length + 4 ? "" : cursor}
+							</span>
+						</span>
 
-				{endIntro ? 
-        <>
-        
-          <ul>{help()}</ul>
-          
-						<h1 className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-							Vuelven las JCC!
-						</h1>
-						<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
-							Las Jornadas de Ciencias de la Computación vuelven los días 23, 24
-							y 25 de Octubre. Contaremos con la presencia de destacados
-							expositores de distintas localidades argentinas, que están
-							radicados en diferentes partes del mundo. Las charlas se
-							realizarán en el salón de actos de la Facultad de Ciencias
-							Exactas, Ingeniería y Agrimensura, además de actividades y
-							talleres abiertos para todos los asistentes. También estaremos
-							difundiendo más información en la cuenta de Instagram de las JCC.
-						</h2>
-					
-        </> : ""}
+						{endIntro ? (
+							<>
+								{Text2}
+							</>
+						) : (
+							<span id="skipButton" onClick={SkipIntro}>
+								Press Enter or Click Here to Skip
+							</span>
+						)}
 
-				<br></br>
-          </>
-        : ""
-        }
+						<span>
+							{" "}
+							{Text4} <span style={{ color: endIntro ? "yellow" : "" }}>{Text3}</span>
+						</span>
+						<br />
+
+						{endIntro ?
+							<>
+
+								<ul>{help()}</ul>
+
+								<h1 className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+									Vuelven las JCC!
+								</h1>
+								<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
+									Las Jornadas de Ciencias de la Computación vuelven los días 23, 24
+									y 25 de Octubre. Contaremos con la presencia de destacados
+									expositores de distintas localidades argentinas, que están
+									radicados en diferentes partes del mundo. Las charlas se
+									realizarán en el salón de actos de la Facultad de Ciencias
+									Exactas, Ingeniería y Agrimensura, además de actividades y
+									talleres abiertos para todos los asistentes. También estaremos
+									difundiendo más información en la cuenta de Instagram de las JCC.
+								</h2>
+
+							</> : ""}
+
+						<br></br>
+					</>
+					: ""
+				}
 				<ul className="previousCommands" id="console23">
 
 					{prevusedCommand.length === 0 ? (
@@ -342,7 +338,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					)}
 					{/* {console.log(prevusedCommand, prevusedCommand.length)} */}
 				</ul>
-        {/* {console.log(intro)} */}
+				{/* {console.log(intro)} */}
 				{Text3.includes("Access") ? (
 					<span className="commands">
 						<span className="userPrefix">{userName}:~\</span>{" "}

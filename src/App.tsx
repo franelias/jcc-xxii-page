@@ -7,13 +7,20 @@ import irobotLogo from "./assets/logo_irobot.jpeg";
 import Terminal from "./components/Terminal";
 import { useState } from "react";
 import clsx from "clsx";
+import trailOfBitsLogo from "./assets/logo_trailofbits.svg";
+import HoverCard from "./components/HoverCard";
+import HoverCardWithModal from "./components/HoverCardWithModal";
+
+enum ItemType {
+	Activity = "activity",
+	Talk = "talk",
+}
 
 type ItemProps = {
 	title: string;
-	subtitle: string;
-	speaker: string;
-	type: "activity" | "talk";
-	// url: string;
+	subtitle?: string;
+	speaker?: string;
+	type: ItemType;
 };
 
 const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
@@ -25,7 +32,7 @@ const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
 					style={{ backgroundImage: "url('src/assets/lambda_transparente.png')" }}
 				></div>
 				<div className="flex flex-col justify-center">
-					<p className="text-[#151711] text-base font-medium leading-normal line-clamp-1">{title} - {speaker}</p>
+					<p className="text-[#151711] text-base font-medium leading-normal line-clamp-1">{title} {speaker && "-"} {speaker}</p>
 					<p className="text-[#7a8764] text-sm font-normal leading-normal line-clamp-2">{subtitle}</p>
 				</div>
 			</div>
@@ -33,37 +40,8 @@ const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
 				<button
 					className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f3f4f0] text-[#151711] text-sm font-medium leading-normal w-fit"
 				>
-					<span className="truncate">Mas info</span>
+					{/* <span className="truncate">Mas info</span> */}
 				</button>
-			</div>
-		</div>)
-}
-
-const HoverCard = ({ url, title, subtitle, link, fit = false }: { url: string; title?: string; subtitle?: string; link?: string, fit?: boolean }) => {
-	return (
-		<div className="relative overflow-hidden rounded-lg bg-white group w-full h-full shadow-lg">
-			<div
-				className={clsx("flex w-full bg-no-repeat rounded-xl group-hover:blur-sm h-[250px] ", fit ? "bg-contain bg-center" : "bg-cover")}
-				style={{ backgroundImage: "url('" + url + "')", backgroundPositionY: fit ? "50%" : "35%" }}
-			>
-			</div>
-			<div className="p-6 absolute inset-0  bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-				<div className="text-center text-black">
-					{title && (<h3 className="text-lg font-semibold">{title}</h3>)}
-					<br />
-					{subtitle && (<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
-						{subtitle}
-					</h2>)}
-					{link && (
-						<>
-							<br />
-							<a className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal cursor-default">
-								{link}
-							</a>
-						</>
-					)}
-
-				</div>
 			</div>
 		</div>)
 }
@@ -84,17 +62,47 @@ const App = () => {
 		},
 		{
 			name: "IRobot",
-			href: "https://www.deepagro.co/",
+			href: "",
 			logo: irobotLogo,
 			description: "iRobot es una empresa líder en el desarrollo de robots domésticos y soluciones de limpieza inteligente. Con una amplia gama de productos innovadores, iRobot se destaca por su tecnología de vanguardia y su compromiso con la calidad y la excelencia.",
 		},
+		{
+			name: "Trail Of Bits",
+			href: "https://www.trailofbits.com/",
+			logo: trailOfBitsLogo,
+			description: "Trail of Bits es una empresa de ciberseguridad que brinda servicios de consultoría, auditoría y desarrollo de software seguro. Con un equipo de expertos en seguridad informática, Trail of Bits trabaja con empresas de todo el mundo para proteger sus sistemas y datos de posibles amenazas.",
+		},
 	];
+
+
+
 
 	const lookingForJobs = [
 		{
-			name: "CacaSoft",
-			href: "https://www.neuralsoft.com/",
-			description: "NeuralSoft es una empresa de software que brinda soluciones tecnológicas a medida para empresas de distintos rubros. Con más de 20 años de experiencia en el mercado, se especializa en el desarrollo de software a medida, aplicaciones móviles, sistemas de gestión y soluciones de e-commerce.",
+			name: "NeuralSoft: Desarrolladores C++ Rosario",
+			apply: "https://www.neuralsoft.com/",
+			description: (
+				<>
+					<p>📢 Nos encontramos en la búsqueda de Desarrolladores para nuestra área de Innovación Tecnológica.</p>
+					<p> Lugar: Rosario</p>
+					<br/>
+					<p> Imaginate:</p>
+					<p> * Desarrollando un lenguaje de programación de última generación, de dominio específico con Inteligencia artificial. No code. <br/>
+						* Siendo parte de un proyecto de innovación de nivel mundial, <br/>
+						* Potenciando tu desarrollo con un gran equipo de profesionales del mundo IT.</p>
+					<br/>
+
+					<p> Requisitos:</p>
+					<p> * Estudiantes avanzados o graduados de carreras de Sistemas o Ingenierías.</p>
+					<p> * Con conocimiento en programación y procesos del desarrollo de software</p>
+					<p> * Que posean conocimiento y experiencia en algunos de estos puntos :</p>
+					<p> - Java, Javascript y/o Python ; C++ o C# ; Bases de datos SQL.; Desarrollo Mobile (IOS y Android, nativos); Deep Learning.</p>
+					<br/>
+
+					<p> Modalidad: Presencial.</p>
+				</>
+			),
+
 			logo: neuralLogo,
 		},
 	];
@@ -118,128 +126,17 @@ const App = () => {
 
 	const [tab, setTab] = useState(getCurrentTab());
 
-	const events = [
-		{
-			title: "Introducción a la Inteligencia Artificial",
-			subtitle: "10:00 AM - 11:30 AM",
-			tab: 1,
-			description: "Exploraremos los conceptos básicos de la IA y sus aplicaciones en el mundo actual.",
-			speakers: "Andrew Ng",
-			type: "talk"
-		},
-		{
-			title: "Charla: Programación en Python",
-			subtitle: "10:30 AM - 12:00 PM",
-			tab: 1,
-			description: "Aprende los fundamentos de la programación en Python y cómo aplicarlos en proyectos reales.",
-			speakers: "Guido van Rossum",
-			type: "talk"
-		},
-		{
-			title: "Partido de fútbol",
-			subtitle: "12:00 PM - 2:00 PM",
-			tab: 3,
-			description: "¡A disfrutar del deporte rey!",
-			speakers: "Alan Turing",
-			type: "activity"
-		},
-		{
-			title: "Desarrollo de aplicaciones móviles con Flutter",
-			subtitle: "2:00 PM - 4:00 PM",
-			tab: 1,
-			description: "Taller práctico para crear tu primera app móvil con Flutter.",
-			speakers: "Tim Sneath",
-			type: "talk"
-		},
-		{
-			title: "Charla: Desarrollo Web con React",
-			subtitle: "2:00 PM - 3:30 PM",
-			tab: 3,
-			description: "Descubre cómo desarrollar aplicaciones web modernas utilizando React.",
-			speakers: "Dan Abramov",
-			type: "talk"
-		},
-		{
-			title: "Charla: Algoritmos y Estructuras de Datos",
-			subtitle: "3:00 PM - 4:30 PM",
-			tab: 3,
-			description: "Una introducción a los algoritmos más importantes y cómo optimizar estructuras de datos.",
-			speakers: "Donald Knuth",
-			type: "talk"
-		},
-		{
-			title: "Charla: Ciberseguridad Básica",
-			subtitle: "4:00 PM - 5:30 PM",
-			tab: 0,
-			description: "Aprende los principios básicos de ciberseguridad para proteger tus datos.",
-			speakers: "Bruce Schneier",
-			type: "talk"
-		},
-		{
-			title: "Caminata por el Parque",
-			subtitle: "5:00 PM - 6:30 PM",
-			tab: 2,
-			description: "Disfruta de un paseo relajante por el parque con amigos.",
-			speakers: "Grace Hopper",
-			type: "activity"
-		},
-		{
-			title: "Fútbol 5",
-			subtitle: "6:00 PM - 7:00 PM",
-			tab: 0,
-			description: "Un partido de fútbol para divertirse y mantenerse en forma.",
-			speakers: "Bjarne Stroustrup",
-			type: "activity"
-		},
-		{
-			title: "Ciberseguridad: Protege tus datos personales",
-			subtitle: "7:00 PM - 8:30 PM",
-			tab: 1,
-			description: "Aprende a identificar y prevenir las principales amenazas cibernéticas.",
-			speakers: "Kevin Mitnick",
-			type: "talk"
-		},
-		{
-			title: "Salida al Bar",
-			subtitle: "7:00 PM - 9:00 PM",
-			tab: 2,
-			description: "Una oportunidad para relajarse y socializar después de un día lleno de actividades.",
-			speakers: "Margaret Hamilton",
-			type: "activity"
-		},
-		{
-			title: "Cena en un nuevo restaurante",
-			subtitle: "7:00 PM - 9:00 PM",
-			tab: 0,
-			description: "Descubrimos juntos la gastronomía local.",
-			speakers: "Linus Torvalds",
-			type: "activity"
-		},
-		{
-			title: "Jornada de Juegos de Mesa",
-			subtitle: "8:00 PM - 10:00 PM",
-			tab: 2,
-			description: "Una noche divertida jugando a los juegos de mesa más populares.",
-			speakers: "Richard Stallman",
-			type: "activity"
-		},
-		{
-			title: "Noche de cine",
-			subtitle: "8:00 PM - 11:00 PM",
-			tab: 0,
-			description: "Proyección especial de una película de ciencia ficción.",
-			speakers: "Steve Wozniak",
-			type: "activity"
-		},
-		{
-			title: "Karaoke",
-			subtitle: "10:00 PM - 12:00 AM",
-			tab: 0,
-			description: "¡Canta tus canciones favoritas y diviértete con amigos!",
-			speakers: "Bill Gates",
-			type: "activity"
-		}
-	];
+	const events: {
+		title: string;
+		subtitle?: string;
+		speakers?: string;
+		type: ItemType;
+		tab: number;
+	}[] = [{
+		title: "Proximamente",
+		tab: 0,
+		type: ItemType.Talk
+	}]
 
 	return (
 		<Layout style={{ fontFamily: "Reddit sans" }}>
@@ -265,7 +162,7 @@ const App = () => {
 							</a>
 						</div>
 						<h2 className="text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">{tab === 0 ? "Todos los eventos" : "Eventos del dia"}</h2>
-						{events.filter((event) => event.tab === tab || tab === 0).map((e) => <Item title={e.title} subtitle={e.subtitle} speaker={e.speakers} type={e.type} />)}
+						{events?.filter((event) => event.tab === tab || tab === 0).map((e) => <Item title={e.title} subtitle={e?.subtitle} speaker={e?.speakers} type={e.type as ItemType} />)}
 					</div>
 
 					<div className="flex mt-12 flex-col md:flex-row group rounded-xl">
@@ -305,6 +202,7 @@ const App = () => {
 							</h2>
 						</div>
 					</div>
+					{/* <Divider /> */}
 					<h1
 						className="text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em] mt-12 pb-3"
 					>
@@ -314,18 +212,18 @@ const App = () => {
 						<HoverCard
 							title="Remera JCC XXII"
 							subtitle="¡La remera oficial de las jornadas de ciencia de la computacion te está esperando! Con un diseño inspirado en una tematica retro, vas a estar a la moda y demostrando que sos un verdadero crack de la programación. ¡No te la pierdas!"
-							url="src/assets/remeras.png"
-							link="¡Reserva la tuya haciendo click aca!"
+							url="src/assets/card_remeras.png"
+							link="https://forms.gle/AwPkbCfrQbunp9ps7"
 						/>
 						<HoverCard
 							title="¡Estamos en YouTube y Twitch tambien!"
 							subtitle="No te pierdas las charlas y actividades en vivo de las jornadas. ¡Suscribite a nuestro canal y activa las notificaciones para no perderte nada!"
-							url="src/assets/yt.jpg"
+							url="src/assets/card_yt.png"
 						/>
 						<HoverCard
 							title="¡Seguinos en Instagram!"
 							subtitle="Contamos con redes oficiales de las jornadas! Vas a encontrar informacion actualizada, novedades y sorteos. ¡No te lo pierdas!"
-							url="src/assets/instagram.png"
+							url="src/assets/card_ig.png"
 						/>
 					</div>
 
@@ -346,7 +244,6 @@ const App = () => {
 								title={sponsor.name}
 								subtitle={sponsor.description}
 								url={sponsor.logo}
-								fit
 							/>
 						))}
 					</div>
@@ -359,16 +256,17 @@ const App = () => {
 								En busqueda laboral
 							</h1>
 							<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
-								Estas empresas en busqueda de talentos como vos. ¡No te pierdas la oportunidad!
+								Estas empresas están en busqueda de talentos como vos. ¡No te pierdas la oportunidad!
 							</h2>
 						</div>
 
 						<div className="flex flex-row w-[400px] h-full gap-4 p-8">
 							{lookingForJobs.map((sponsor) => (
-								<HoverCard
-									subtitle={sponsor.description}
+								<HoverCardWithModal
 									url={sponsor.logo}
-									fit
+									modalBody={sponsor.description}
+									modalTitle={sponsor.name}
+									buttonUrl={sponsor.apply}
 								/>
 							))}
 						</div>
