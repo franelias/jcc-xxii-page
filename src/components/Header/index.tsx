@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
+import lamiImg from "../../assets/lambda_transparente.png";
 
 import "./styles.scss"
 
@@ -8,7 +9,7 @@ const Header: React.FC = () => {
 
     return (
         <Header
-            className="bg-[--secondary-color] justify-between"
+            className="bg-[--secondary-color] "
             style={{
                 position: 'sticky',
                 top: 0,
@@ -18,21 +19,11 @@ const Header: React.FC = () => {
                 alignItems: 'center',
             }}
         >
-            <div className="mr-4">Jornadas de Ciencias de la Computación 2024</div>
-
-            {/* <div className="flex c">
-                <span className="transition-colors mr-4 hover:text-pink-700">
-                    <Link url="https://www.instagram.com/jccfceia">
-                        <BiLogoInstagram className="hover:text-pink-700" size={24} />
-                    </Link>
-                </span>
-                <span className="transition-colors  hover:text-pink-700">
-                    <Link url="https://www.youtube.com/channel/UC-CReVEx4-3AfJOH1Tr-udw">
-                        <BiLogoYoutube className="hover:text-pink-700" size={24} />
-                    </Link>
-                </span>
-            </div> */}
-
+            <div
+                className="bg-center bg-no-repeat aspect-video bg-cover rounded-lg h-14 w-fit"
+                style={{ backgroundImage: `url(${lamiImg})` }}
+            ></div>
+            <div className="mr-4 text-2xl font-black leading-tight" style={{marginLeft: -15}}>JCC XXII</div>
         </Header>
     );
 };

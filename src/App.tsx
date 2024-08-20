@@ -1,15 +1,21 @@
 import Layout, { Content, Footer } from "antd/es/layout/layout";
 import Header from "./components/Header";
-import neuralLogo from "./assets/logo_neuralsoft.svg";
-// import grupoSanCristobalLogo from "./assets/logo_gruposancristobal.svg";
-import deepAgroLogo from "./assets/logo_deepagro.png";
-import irobotLogo from "./assets/logo_irobot.jpeg";
 import Terminal from "./components/Terminal";
 import { useState } from "react";
 import clsx from "clsx";
-import trailOfBitsLogo from "./assets/logo_trailofbits.svg";
 import HoverCard from "./components/HoverCard";
 import HoverCardWithModal from "./components/HoverCardWithModal";
+
+import neuralLogo from "./assets/logo_neuralsoft.svg";
+import deepAgroLogo from "./assets/logo_deepagro.png";
+import irobotLogo from "./assets/logo_irobot.jpeg";
+import trailOfBitsLogo from "./assets/logo_trailofbits.svg";
+
+import remeraCard from "./assets/card_remeras.png";
+import youtubeCard from "./assets/card_yt.png";
+import instagramCard from "./assets/card_ig.png";
+
+import lamiImg from "./assets/lambda_transparente.png";
 
 enum ItemType {
 	Activity = "activity",
@@ -29,21 +35,22 @@ const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
 			<div className="flex items-center gap-4">
 				<div
 					className="bg-center bg-no-repeat aspect-video bg-cover rounded-lg h-14 w-fit"
-					style={{ backgroundImage: "url('src/assets/lambda_transparente.png')" }}
+					style={{ backgroundImage: `url(${lamiImg})` }}
 				></div>
 				<div className="flex flex-col justify-center">
 					<p className="text-[#151711] text-base font-medium leading-normal line-clamp-1">{title} {speaker && "-"} {speaker}</p>
 					<p className="text-[#7a8764] text-sm font-normal leading-normal line-clamp-2">{subtitle}</p>
 				</div>
 			</div>
-			<div className="shrink-0">
+			{/* <div className="shrink-0">
 				<button
 					className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f3f4f0] text-[#151711] text-sm font-medium leading-normal w-fit"
 				>
-					{/* <span className="truncate">Mas info</span> */}
+					<span className="truncate">Mas info</span>
 				</button>
-			</div>
-		</div>)
+			</div> */}
+		</div>
+	)
 }
 
 const App = () => {
@@ -74,9 +81,6 @@ const App = () => {
 		},
 	];
 
-
-
-
 	const lookingForJobs = [
 		{
 			name: "NeuralSoft: Desarrolladores C++ Rosario",
@@ -85,19 +89,19 @@ const App = () => {
 				<>
 					<p>📢 Nos encontramos en la búsqueda de Desarrolladores para nuestra área de Innovación Tecnológica.</p>
 					<p> Lugar: Rosario</p>
-					<br/>
+					<br />
 					<p> Imaginate:</p>
-					<p> * Desarrollando un lenguaje de programación de última generación, de dominio específico con Inteligencia artificial. No code. <br/>
-						* Siendo parte de un proyecto de innovación de nivel mundial, <br/>
+					<p> * Desarrollando un lenguaje de programación de última generación, de dominio específico con Inteligencia artificial. No code. <br />
+						* Siendo parte de un proyecto de innovación de nivel mundial, <br />
 						* Potenciando tu desarrollo con un gran equipo de profesionales del mundo IT.</p>
-					<br/>
+					<br />
 
 					<p> Requisitos:</p>
 					<p> * Estudiantes avanzados o graduados de carreras de Sistemas o Ingenierías.</p>
 					<p> * Con conocimiento en programación y procesos del desarrollo de software</p>
 					<p> * Que posean conocimiento y experiencia en algunos de estos puntos :</p>
 					<p> - Java, Javascript y/o Python ; C++ o C# ; Bases de datos SQL.; Desarrollo Mobile (IOS y Android, nativos); Deep Learning.</p>
-					<br/>
+					<br />
 
 					<p> Modalidad: Presencial.</p>
 				</>
@@ -174,7 +178,7 @@ const App = () => {
 							</h1>
 
 
-							<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
+							<h2 className="text-base font-normal  @[480px]:text-base @[480px]:font-normal">
 								Las Jornadas de Ciencias de la Computación son una iniciativa del
 								Departamento de Ciencias de la Computación de la Facultad de
 								Ciencias Exactas, Ingeniería y Agrimensura de la Universidad
@@ -186,7 +190,7 @@ const App = () => {
 								investigación y desarrollo de la región.
 							</h2>
 
-							<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
+							<h2 className="text-base font-normal  @[480px]:text-base @[480px]:font-normal">
 								Las JCC se llevaron a cabo por primera vez en noviembre del año
 								2000. Año tras año han participado decenas de personas
 								provenientes de empresas de desarrollo de software local,
@@ -212,18 +216,20 @@ const App = () => {
 						<HoverCard
 							title="Remera JCC XXII"
 							subtitle="¡La remera oficial de las jornadas de ciencia de la computacion te está esperando! Con un diseño inspirado en una tematica retro, vas a estar a la moda y demostrando que sos un verdadero crack de la programación. ¡No te la pierdas!"
-							url="src/assets/card_remeras.png"
+							url={remeraCard}
 							link="https://forms.gle/AwPkbCfrQbunp9ps7"
 						/>
 						<HoverCard
-							title="¡Estamos en YouTube y Twitch tambien!"
+							title="¡Estamos en YouTube tambien!"
 							subtitle="No te pierdas las charlas y actividades en vivo de las jornadas. ¡Suscribite a nuestro canal y activa las notificaciones para no perderte nada!"
-							url="src/assets/card_yt.png"
+							url={youtubeCard}
+							link="https://www.youtube.com/@lcc-fceia-unr531"
 						/>
 						<HoverCard
 							title="¡Seguinos en Instagram!"
 							subtitle="Contamos con redes oficiales de las jornadas! Vas a encontrar informacion actualizada, novedades y sorteos. ¡No te lo pierdas!"
-							url="src/assets/card_ig.png"
+							url={instagramCard}
+							link="https://www.instagram.com/jccfceia"
 						/>
 					</div>
 
@@ -231,7 +237,7 @@ const App = () => {
 						<h1
 							className=" text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em]"
 						>
-							Las JCC 2024 es posible gracias a las contribuciones de nuestros sponsors
+							Las JCC XXII es posible gracias a las contribuciones de nuestros sponsors
 						</h1>
 						<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
 							Si queres sumarte a esta lista, envianos un email a jcc@fceia.unr.edu.ar
@@ -251,7 +257,7 @@ const App = () => {
 					<div className="flex mt-12 flex-col md:flex-row justify-center items-center  bg-[#e7dccd] rounded-xl p-6">
 						<div className="flex flex-col gap-2 text-center">
 							<h1
-								className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
+								className="text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
 							>
 								En busqueda laboral
 							</h1>
