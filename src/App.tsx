@@ -100,7 +100,7 @@ const App = () => {
 					<p> * Estudiantes avanzados o graduados de carreras de Sistemas o Ingenierías.</p>
 					<p> * Con conocimiento en programación y procesos del desarrollo de software</p>
 					<p> * Que posean conocimiento y experiencia en algunos de estos puntos :</p>
-					<p> - Java, Javascript y/o Python ; C++ o C# ; Bases de datos SQL.; Desarrollo Mobile (IOS y Android, nativos); Deep Learning.</p>
+					<p> Java, Javascript y/o Python ; C++ o C# ; Bases de datos SQL.; Desarrollo Mobile (IOS y Android, nativos); Deep Learning.</p>
 					<br />
 
 					<p> Modalidad: Presencial.</p>
@@ -150,7 +150,7 @@ const App = () => {
 				<div className="pl-4 pr-4 pb-2 md:pl-24 md:pr-24 md:pt-12 md:pb-2">
 					<Terminal />
 
-					<div className="pt-2" id={"Charlas"} >
+					<div className="pt-2" id="Charlas">
 						<div className="flex border-b border-[#e2e5dc] px-4 justify-between">
 							<a onClick={() => setTab(0)} className={clsx("flex flex-col items-center justify-center pb-[13px] pt-4 flex-1", tab === 0 ? "text-[#223611] border-b-[#151711] border-b-[3px]" : "text-[#7a8764]")}>
 								<p className="text-center text-sm font-bold leading-normal tracking-[0.015em]">Todos los eventos</p>
@@ -169,7 +169,7 @@ const App = () => {
 						{events?.filter((event) => event.tab === tab || tab === 0).map((e) => <Item title={e.title} subtitle={e?.subtitle} speaker={e?.speakers} type={e.type as ItemType} />)}
 					</div>
 
-					<div className="flex mt-12 flex-col md:flex-row group rounded-xl">
+					<div className="flex mt-12 flex-col md:flex-row group rounded-xl" id="MasInfo">
 						<div className="flex flex-col gap-2">
 							<h1
 								className="text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em]"
@@ -212,7 +212,7 @@ const App = () => {
 					>
 						Te puede interesar
 					</h1>
-					<div className="flex flex-row w-full h-full gap-4 ">
+					<div className="flex flex-col md:flex-row w-full h-full gap-4" id="LinksInteresantes">
 						<HoverCard
 							title="Remera JCC XXII"
 							subtitle="¡La remera oficial de las jornadas de ciencia de la computacion te está esperando! Con un diseño inspirado en una tematica retro, vas a estar a la moda y demostrando que sos un verdadero crack de la programación. ¡No te la pierdas!"
@@ -233,7 +233,7 @@ const App = () => {
 						/>
 					</div>
 
-					<div className="flex flex-col gap-2 mt-12">
+					<div className="flex flex-col gap-2 mt-12" id="Sponsors">
 						<h1
 							className=" text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em]"
 						>
@@ -244,7 +244,7 @@ const App = () => {
 						</h2>
 					</div>
 
-					<div className="flex flex-row w-full h-full gap-4 pt-4">
+					<div className="flex flex-col md:flex-row w-full h-full gap-4 pt-4">
 						{sponsors.map((sponsor) => (
 							<HoverCard
 								title={sponsor.name}
@@ -254,7 +254,7 @@ const App = () => {
 						))}
 					</div>
 
-					<div className="flex mt-12 flex-col md:flex-row justify-center items-center  bg-[#e7dccd] rounded-xl p-6">
+					<div className="flex mt-12 flex-col md:flex-row justify-center items-center  bg-[#e7dccd] rounded-xl p-6" id="BusquedaLaboral">
 						<div className="flex flex-col gap-2 text-center">
 							<h1
 								className="text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"

@@ -62,14 +62,28 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 
 	const sections = [
 		"Charlas",
-		"FutbolLCC",
-		"NocheDeJuegos",
-		"Fiesta",
-		"Footer",
+		"MasInfo",
+		"LinksInteresantes",
+		"Sponsors",
+		"BusquedaLaboral",
 	];
+
+	const files = {
+		"secciones.txt": {
+			type: "file",
+			content: "Charlas MasInfo LinksInteresantes Sponsors BusquedaLaboral",
+		},
+	};
+
 	const [endIntro, setEndIntro] = useState<boolean>(false);
 	const [introEnabled, setIntroEnabled] = useState<boolean>(true);
-	const disableMsg = () => { setEndIntro(false); setIntroEnabled(false); };
+	const disableMsg = () => { setEndIntro(true); setIntroEnabled(false); };
+
+	useEffect(() => {
+		if (!import.meta.env.PROD) {
+			disableMsg();
+		}
+	}, [])
 
 	const generalComms: [string, (arg?: string) => JSX.Element, string][] = [
 		[
@@ -77,32 +91,32 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 			() => {
 				return (
 					<ul>
-						{sections.map((item) => {
+						{Object.keys(files).map((item) => {
 							return <li>{item}</li>;
 						})}
 					</ul>
 				);
 			},
-			"ls: Muestra todas las secciones disponibles",
+			"ls: muestra todas las secciones disponibles",
 		],
 		[
 			"show",
 			(arg?: string) => {
-				if (arg) {
-					const index = sections.findIndex(
-						(section) => section.toLowerCase() === arg.toLocaleLowerCase()
-					);
-					if (index === -1)
-						return notFound(arg);
-					else {
-						const target = document.getElementById(sections[index]);
-            console.log(target?.getBoundingClientRect())
-            window.scrollTo({top: target?.getBoundingClientRect().top, behavior: "smooth"});
-						
-						return <>Loading...</>;
-					}
+				if (!arg) {
+					return <>show: falta un argumento</>;
 				}
-				return <></>;
+
+				const index = sections.findIndex(
+					(section) => section.toLowerCase() === arg.toLocaleLowerCase()
+				);
+				if (index === -1)
+					return showNotFound(arg);
+
+				const target = document.getElementById(sections[index]);
+				console.log(target?.getBoundingClientRect())
+				window.scrollTo({ top: target?.getBoundingClientRect().top, behavior: "smooth" });
+
+				return <>Loading...</>;
 			},
 			"show <section>: te lleva a la sección especificada",
 		],
@@ -111,22 +125,45 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 			() => {
 				return <>{help()}</>;
 			},
-			"help: Muestra los comandos y links disponibles. Cabe destacar que al escribir un link, este se abrirá en una nueva pestaña.",
+			"help: muestra los comandos y links disponibles.",
+		],
+		[
+			"info",
+			() => {
+				return <>{info()}</>;
+			},
+			"info: muestra informacion sobre las JCC.",
 		],
 		[
 			"man",
 			(arg?: string) => {
-				if (arg) {
-					const index = generalComms.findIndex(
-						(comm) => comm[0].toLowerCase() === arg.toLowerCase()
-					);
-					if (index === -1)
-						return notFound(arg)
-					else return <li> {generalComms[index][2]}</li>;
+				if (!arg) {
+					return <>man: falta un argumento</>;
 				}
-				return <></>;
+
+				const index = generalComms.findIndex(
+					(comm) => comm[0].toLowerCase() === arg.toLowerCase()
+				);
+				if (index === -1)
+					return manNotFound(arg)
+
+				return <li> {generalComms[index][2]}</li>;
 			},
-			"man <command>: Muestra la descripción de un comando",
+			"man <comando>: muestra la descripción de un comando",
+		],
+		[
+			"cat",
+			(arg?: string) => {
+				if (!arg) {
+					return <>cat: falta un argumento</>;
+				}
+
+				if (!files[arg])
+					return catNotFound(arg)
+
+				return <li> {files[arg].content}</li>;
+			},
+			"cat <archivo>: imprime el contenido de un archivo al standard output",
 		],
 	];
 	const linkComms: [string, string][] = [
@@ -135,7 +172,9 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		["etc.", ""],
 	];
 	const userName = "jcc@dcc.fceia.unr.edu.ar";
-	const notFound = (arg: string) => { return <> {"bash: " + arg + ": comando no encontrado" + "\n"} </>; };
+	const showNotFound = (arg: string) => { return <> {"show: " + arg + ": seccion no encontrada" + "\n"} </>; };
+	const manNotFound = (arg: string) => { return <> {"man: " + arg + ": comando no encontrado" + "\n"} </>; };
+	const catNotFound = (arg: string) => { return <> {"cat: " + arg + ": archivo o directorio no encontrado" + "\n"} </>; };
 	const help = () => {
 		return (
 			<>
@@ -165,6 +204,26 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		);
 	};
 
+	const info = () => {
+		return (
+			<>
+				<h1 className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+					Vuelven las JCC!
+				</h1>
+				<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
+					Las Jornadas de Ciencias de la Computación vuelven los días 23, 24
+					y 25 de Octubre. Contaremos con la presencia de destacados
+					expositores de distintas localidades argentinas, que están
+					radicados en diferentes partes del mundo. Las charlas se
+					realizarán en el salón de actos de la Facultad de Ciencias
+					Exactas, Ingeniería y Agrimensura, además de actividades y
+					talleres abiertos para todos los asistentes. También estaremos
+					difundiendo más información en la cuenta de Instagram de las JCC.
+				</h2>
+			</>
+		);
+	};
+
 	const [prevusedCommand, setprevusedCommand] = useState<[string, JSX.Element][]>([]);
 
 	function SkipIntro() {
@@ -178,7 +237,8 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 			clearInterval(id);
 		}
 		setText1("ssh " + userName);
-		setText3("Conectado.");
+		setText2(userName + "'s password:");
+		setText3("Conectado!");
 		setEndIntro(true);
 	}
 
@@ -192,13 +252,14 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 		);
 		if (lid !== -1) window.open(linkComms[lid][1]);
 		else if (cid !== -1) return generalComms[cid][1](comms[1]);
-		else return notFound(comms[0]);
+		else return manNotFound(comms[0]);
 
 		return <></>;
 	};
 
 	const inputHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		const key = e.key
+
 		if (key === "Enter") {
 			if (!Text3.includes("Access")) {
 				let id: number = setTimeout(() => { }, 0) as unknown as number;
@@ -221,21 +282,35 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				if (previousCommand !== "") {
 					setprevusedCommand(prevusedCommand =>
 						[...prevusedCommand, [previousCommand, parse(previousCommand)]]);
-          
+
 				}
 
 				(CommandArea as HTMLInputElement).value = "";
 			}
+
+			return;
 		}
 
+		if (key === "c") {
+			if (e.ctrlKey || e.metaKey) {
+				const CommandArea = document.getElementById("command");
+				if (CommandArea) {
+					const previousCommand: string = (CommandArea as HTMLInputElement).value;
+					setprevusedCommand(prevusedCommand =>
+						[...prevusedCommand, [`${previousCommand}^C`, <></>]]);
+
+					(CommandArea as HTMLInputElement).value = "";
+				}
+			}
+
+			return;
+		}
 	}
 
-	const keyUpHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-			const Terminal = document.getElementById("Terminal");
-      if(Terminal)
-        Terminal.scrollTop = Terminal.scrollHeight;
-		}
+	const keyUpHandler = () => {
+		const Terminal = document.getElementById("Terminal");
+		if (Terminal)
+			Terminal.scrollTop = Terminal.scrollHeight;
 	}
 
 	useEffect(() => {
@@ -282,7 +357,7 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 							</>
 						) : (
 							<span id="skipButton" onClick={SkipIntro} >
-                Aprete Enter o Click Aquí para Saltear
+								Apreta Enter o clickea aca para saltear
 							</span>
 						)}
 
@@ -294,31 +369,16 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 
 						{endIntro ?
 							<>
-
-			
-                
-								<h1 className=" text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-									Vuelven las JCC!
-								</h1>
-								<h2 className=" text-base font-normal  @[480px]:text-base @[480px]:font-normal">
-									Las Jornadas de Ciencias de la Computación vuelven los días 23, 24
-									y 25 de Octubre. Contaremos con la presencia de destacados
-									expositores de distintas localidades argentinas, que están
-									radicados en diferentes partes del mundo. Las charlas se
-									realizarán en el salón de actos de la Facultad de Ciencias
-									Exactas, Ingeniería y Agrimensura, además de actividades y
-									talleres abiertos para todos los asistentes. También estaremos
-									difundiendo más información en la cuenta de Instagram de las JCC.
-								</h2>
-                <br/>
-					      <ul>
-                  <li key={"helpIntro"}>
+								{info()}
+								<br />
+								<ul>
+									<li key={"helpIntro"}>
 										<span className="commands">
 											<span className="userPrefix">{userName}:~\</span>
 											help
 										</span>
 									</li>
-                  {help()}</ul>
+									{help()}</ul>
 							</> : ""}
 
 						<br></br>
@@ -346,11 +406,10 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					)}
 					{/* {console.log(prevusedCommand, prevusedCommand.length)} */}
 				</ul>
-				{/* {console.log(intro)} */}
 				{endIntro ? (
 					<span className="commands">
 						<span className="userPrefix">{userName}:~\</span>{" "}
-						<input type="text" id="command" name="command" autoFocus onKeyDown={inputHandler} onKeyUp={keyUpHandler}></input>
+						<input type="text" id="command" name="command" onKeyDown={inputHandler} onKeyUp={keyUpHandler}></input>
 					</span>
 				) : (
 					""

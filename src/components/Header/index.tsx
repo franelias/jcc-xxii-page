@@ -9,7 +9,7 @@ const Header: React.FC = () => {
 
     return (
         <Header
-            className="bg-[--secondary-color] "
+            className="bg-[--secondary-color] justify-center md:justify-start"
             style={{
                 position: 'sticky',
                 top: 0,

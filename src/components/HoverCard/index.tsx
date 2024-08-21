@@ -10,17 +10,18 @@ type HoverCardProps = {
 
 const HoverCard: React.FC<HoverCardProps> = ({ url, title, subtitle, link }) => {
     return (
-        <div className="flex w-full h-full flex-col">
+        <div className="flex flex-col md:mt-0 mb-2 w-full">
             <Card
                 onClick={link ? () => window.open(link) : undefined}
-                className="relative overflow-hidden rounded-lg shadow-lg w-full h-[250px]"
+                className="relative overflow-hidden rounded-lg shadow-lg"
                 style={{
                     backgroundImage: `url(${url})`,
                     backgroundSize: 'contain',
+                    aspectRatio: '2240 / 1000',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     cursor: link ? 'pointer' : 'default',
-                    position: 'relative',
+                    // height: '250px', // Set a fixed height to ensure the image fills the card
                     transition: 'all 0.3s ease-in-out',
                 }}
             >
@@ -32,5 +33,6 @@ const HoverCard: React.FC<HoverCardProps> = ({ url, title, subtitle, link }) => 
         </div>
     );
 };
+
 
 export default HoverCard;
