@@ -27,7 +27,7 @@ body {
 }
 
 .tag {
-  background-color: #ca5057;
+  background-color: #223611;
   border-radius: 16px;
   color: #fff;
   display: inline-block;
@@ -35,22 +35,22 @@ body {
   font-weight: 500;
   letter-spacing: .0375rem;
   line-height: 1;
-  margin: 7px  10px;
-  padding: 6px 15px 5px;
+  margin: 7px  5px;
+  padding: 6px 10px 5px;
   position: relative;
   text-align: center;
   text-decoration: none;
   white-space: nowrap;
 }
 .tag:hover {
-  background-color: #b40c17;
+  background-color: #395a1c;
 }
 
 .is-active {
-  background-color: #7b2026;
+  background-color: #4f7c27;
 }
 .tag.is-active:before {
-  background-color: #7b2026;
+  background-color: #4f7c27;
   bottom: 0;
   content: "";
   height: 10px;

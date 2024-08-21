@@ -17,6 +17,12 @@ import instagramCard from "./assets/card_ig.png";
 
 import lamiImg from "./assets/lambda_transparente.png";
 
+import Link from "./components/Link";
+import CenterTitle from "./components/CenterTitle";
+import { act } from "react-dom/test-utils";
+import Chip from "./components/Chip";
+
+
 enum ItemType {
 	Activity = "activity",
 	Talk = "talk",
@@ -278,8 +284,44 @@ const App = () => {
 							))}
 						</div>
 					</div>
+      <div className="w-full flex-1 flex-col py-5 pt-10 font-bold border-t">
+					<CenterTitle className="text-center">Ediciones anteriores</CenterTitle>
+					<div class="flex items-center justify-center p-4">
+						{Array.from(
+							{ length: new Date().getFullYear() - 2005 + 1 },
+							(_, i) => 2005 + i
+						).map(
+							(year) =>
+								year !== 2024 && (
+									<>
+										{/* {year !== 2005 ? " - " : ""} */}
+										<span className={"text-sm font-normal leading-normal flex size-10 items-center justify-center text-[#1C160C] py-5"  + ( year === activeYear? "font-bold tracking-[0.015em] rounded-full bg-[#223611]" : "")}
+                    
+                    >
+											<Link
+												key={year}
+												url={`https://jcc.dcc.fceia.unr.edu.ar/${year}`}
+                        
+											>
+												<div
+                          className={year === activeYear? "font-bold tracking-[0.015em] rounded-full bg-[#d3c593]" : ""}
+													style={{margin: "0 5px"}}
+													onClick={() => {
+														setActiveYear(year);
+													}}
+												>
+													<Chip {year}/>
+												</div>
+											</Link>
+										</span>
+									</>
+								)
+						)}
+					</div>
+				</div>
 				</div>
 			</Content>
+
 			<Footer className="flex flex-row items-center justify-center" id={"Footer"}>
 				Facultad de Ciencias Exactas, Ingeniería y Agrimensura. Av. Pellegrini
 				250, Rosario, Santa Fe, República Argentina. Teléfono: (+54) 0341-
