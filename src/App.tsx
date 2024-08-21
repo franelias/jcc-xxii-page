@@ -59,6 +59,7 @@ const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
 	)
 }
 
+
 const App = () => {
 	const [activeYear, setActiveYear] = useState(-1);
 	const sponsors = [
