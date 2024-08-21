@@ -11,9 +11,17 @@ $font-color: #d3c593;
   line-height: 1.2;
   background-color: $background-color;
   height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   // max-height: 350px;
 }
-.fontColor{
+
+
+.terminal::-webkit-scrollbar {
+  display: none;
+}
+
+.fontColor {
   color: $font-color;
 
 }
@@ -85,7 +93,7 @@ input[type="text"]:focus {
 
 #skipButton {
   position: absolute;
-  right: 2%;
+  right: 10%;
   font-style: italic;
   color: gray;
 }
