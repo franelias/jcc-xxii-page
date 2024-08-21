@@ -97,9 +97,24 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 					</ul>
 				);
 			},
-			"ls: muestra todas las secciones disponibles",
+			"ls: muestra los archivos disponibles",
+		],
+		
+		[
+			"help",
+			() => {
+				return <>{help()}</>;
+			},
+			"help: muestra los comandos y links disponibles.",
 		],
 		[
+			"info",
+			() => {
+				return <>{info()}</>;
+			},
+			"info: muestra informacion sobre las JCC.",
+		],
+    [
 			"show",
 			(arg?: string) => {
 				if (!arg) {
@@ -119,20 +134,6 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				return <>Loading...</>;
 			},
 			"show <section>: te lleva a la sección especificada",
-		],
-		[
-			"help",
-			() => {
-				return <>{help()}</>;
-			},
-			"help: muestra los comandos y links disponibles.",
-		],
-		[
-			"info",
-			() => {
-				return <>{info()}</>;
-			},
-			"info: muestra informacion sobre las JCC.",
 		],
 		[
 			"man",
@@ -169,7 +170,6 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	const linkComms: [string, string][] = [
 		["Youtube", "https://www.youtube.com/channel/UC-CReVEx4-3AfJOH1Tr-udw"],
 		["Instagram", "https://www.instagram.com/jccfceia"],
-		["etc.", ""],
 	];
 	const userName = "jcc@dcc.fceia.unr.edu.ar";
 	const showNotFound = (arg: string) => { return <> {"show: " + arg + ": seccion no encontrada" + "\n"} </>; };
@@ -181,24 +181,27 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 				<span>
 					<span style={{ color: "skyblue" }}>Comandos disponibles:</span>
 				</span>
-				<li>
-					<span style={{ color: "#c9c9c9" }}>General: </span>
-					{generalComms.map((item, index) => {
+				<>
+					<li style={{ color: "#c9c9c9", marginLeft: "20px" }}>General: </li>
+					{generalComms.map((item) => {
 						return (
-							<span>
-								{index !== generalComms.length - 1 ? item[0] + ", " : item[0]}
-							</span>
+							<li style={{marginLeft: "40px"}}>{item[2]}</li>
 						);
 					})}
-				</li>
-				<li>
-					<span style={{ color: "#c9c9c9" }}>Links: </span>
-					{linkComms.map((item, index) => {
+				</>
+        <br/>
+				<>
+					<li style={{ color: "#c9c9c9", marginLeft: "20px" }}>Links: (Escribe cualquiera para abrir en una nueva pestaña dicha opcion) </li>
+          
+          
+					{linkComms.map((item) => {
 						return (
-							<>{index !== linkComms.length - 1 ? item[0] + ", " : item[0]}</>
+							<li style={{marginLeft: "40px"}}>{item[0]}</li>
 						);
 					})}
-				</li>
+          
+
+				</>
 				<br />
 			</>
 		);
@@ -314,6 +317,24 @@ const Terminal: React.FC<PropsWithChildren<TerminalProps>> = () => {
 	}
 
 	useEffect(() => {
+    document.addEventListener("keydown", function (event) {
+			if (event.key === "Enter") {
+				if (!Text3.includes("Access")) {
+					let id: number = setTimeout(() => { }, 0) as unknown as number;
+					while (id--) {
+						clearTimeout(id);
+					}
+
+					id = setInterval(() => { }, 0) as unknown as number;
+					while (id--) {
+						clearInterval(id);
+					}
+          setText1("ssh " + userName);
+          setText2(userName + "'s password:");
+          setText3("Conectado!");
+          setEndIntro(true);
+				}}});
+
 		Typewriter("ssh " + userName, 100, setText1);
 
 		setTimeout(() => {
