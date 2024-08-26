@@ -1,62 +1,26 @@
-import Layout, { Content, Footer } from "antd/es/layout/layout";
-import Header from "./components/Header";
-import Terminal from "./components/Terminal";
-import { useState } from "react";
-import clsx from "clsx";
 import { Tag } from "antd";
+import Layout, { Content, Footer } from "antd/es/layout/layout";
+import clsx from "clsx";
+import { useState } from "react";
+
+import Header from "./components/Header";
 import HoverCard from "./components/HoverCard";
 import HoverCardWithModal from "./components/HoverCardWithModal";
+import Item, { ItemType } from "./components/Item";
+import Link from "./components/Link";
+import Terminal from "./components/Terminal";
 
-import neuralLogo from "./assets/logo_neuralsoft.svg";
 import deepAgroLogo from "./assets/logo_deepagro.png";
 import irobotLogo from "./assets/logo_irobot.jpeg";
+import neuralLogo from "./assets/logo_neuralsoft.svg";
 import trailOfBitsLogo from "./assets/logo_trailofbits.svg";
 
 import fceiaLogo from "./assets/logo_FCEIA.png";
 import unrLogo from "./assets/logo_unr.png";
 
+import instagramCard from "./assets/card_ig.png";
 import remeraCard from "./assets/card_remeras.png";
 import youtubeCard from "./assets/card_yt.png";
-import instagramCard from "./assets/card_ig.png";
-import lamiImg from "./assets/lambda_transparente.png";
-
-import Link from "./components/Link";
-
-enum ItemType {
-	Activity = "activity",
-	Talk = "talk",
-}
-
-type ItemProps = {
-	title: string;
-	subtitle?: string;
-	speaker?: string;
-	type: ItemType;
-};
-
-const Item = ({ title, subtitle, speaker, type }: ItemProps) => {
-	return (
-		<div className={clsx("flex items-center gap-4  px-4 py-3 justify-between mb-2 rounded-lg", type === "talk" && "bg-white", type === "activity" && "bg-[#f8f1d9]")}>
-			<div className="flex items-center gap-4">
-				<div
-					className="bg-center bg-no-repeat aspect-video bg-cover rounded-lg h-14 w-fit"
-					style={{ backgroundImage: `url(${lamiImg})` }}
-				></div>
-				<div className="flex flex-col justify-center">
-					<p className="text-[#151711] text-base font-medium leading-normal line-clamp-1">{title} {speaker && "-"} {speaker}</p>
-					<p className="text-[#7a8764] text-sm font-normal leading-normal line-clamp-2">{subtitle}</p>
-				</div>
-			</div>
-			{/* <div className="shrink-0">
-				<button
-					className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f3f4f0] text-[#151711] text-sm font-medium leading-normal w-fit"
-				>
-					<span className="truncate">Mas info</span>
-				</button>
-			</div> */}
-		</div>
-	)
-}
 
 const App = () => {
 	const sponsors = window.sponsors || [
@@ -171,7 +135,7 @@ const App = () => {
 					<Terminal />
 
 					<div className="pt-2" id="Charlas">
-						<div className="flex border-b border-[#e2e5dc] px-4 justify-between">
+						<div className="flex border-b border-[#e2e5dc]  justify-between">
 							<a onClick={() => setTab(0)} className={clsx("flex flex-col items-center justify-center pb-[13px] pt-4 flex-1", tab === 0 ? "text-[#223611] border-b-[#151711] border-b-[3px]" : "text-[#7a8764]")}>
 								<p className="text-center text-sm font-bold leading-normal tracking-[0.015em]">Todos los eventos</p>
 							</a>
