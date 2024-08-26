@@ -4,7 +4,7 @@ import { Card } from 'antd';
 type HoverCardProps = {
     url: string;
     title?: string;
-    subtitle?: string;
+    subtitle?: JSX.Element;
     link?: string;
 };
 

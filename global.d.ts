@@ -2,37 +2,26 @@ export { }
 declare global {
   interface Window {
     schedule: {
-      dayId: string;
-      date: string;
-      talks: {
-        title: string;
-        hour: string;
-        shortDescription?: string;
-        description?: string;
-        hrefText?: string;
-        hrefUrl?: string;
-      }[];
-      activities?: {
-        title: string;
-        hour: string;
-        shortDescription?: string;
-        description?: string;
-        hrefText?: string;
-        hrefUrl?: string;
-      }[];
+      title: string;
+      subtitle?: string;
+      speakers?: string;
+      type: ItemType;
+      tab: number;  
     }[];
     sponsors: {
+      name: string;
       href: string;
       logo: string;
+      description: JSX.Element;
     }[];
     sponsorsJobSearch: {
-      logo: string;
-      jobTitle: string;
-      jobDescription: string;
-      jobHrefText: string;
-      jobHrefUrl: string;
+      name: string;
+      apply: string;
+      description: JSX.Element;
+      logo: string;  
     }[];
     university: {
+      name: string;
       href: string;
       logo: string;
     }[];
