@@ -12,12 +12,13 @@ declare global {
       name: string;
       href: string;
       logo: string;
-      description: JSX.Element;
+      logoStyles: string;
+      description: string;
     }[];
     sponsorsJobSearch: {
       name: string;
       apply: string;
-      description: JSX.Element;
+      description: string;
       logo: string;  
     }[];
     university: {

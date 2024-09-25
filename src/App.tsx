@@ -10,59 +10,14 @@ import Item, { ItemType } from "./components/Item";
 import Link from "./components/Link";
 import Terminal from "./components/Terminal";
 
-import deepAgroLogo from "./assets/logo_deepagro.png";
-import irobotLogo from "./assets/logo_irobot.jpeg";
-import neuralLogo from "./assets/logo_neuralsoft.svg";
-import trailOfBitsLogo from "./assets/logo_trailofbits.svg";
-
-import fceiaLogo from "./assets/logo_FCEIA.png";
-import unrLogo from "./assets/logo_unr.png";
-
 import instagramCard from "./assets/card_ig.png";
 import remeraCard from "./assets/card_remeras.png";
 import youtubeCard from "./assets/card_yt.png";
 
 const App = () => {
-	const sponsors = window.sponsors || [
-		{
-			name: "NeuralSoft",
-			href: "https://www.neuralsoft.com/",
-			logo: neuralLogo,
-			description: <p>NeuralSoft es una empresa de software que brinda soluciones tecnológicas a medida para empresas de distintos rubros. Con más de 20 años de experiencia en el mercado, se especializa en el desarrollo de software a medida, aplicaciones móviles, sistemas de gestión y soluciones de e-commerce.</p>,
-		},
-		{
-			name: "DeepAgro",
-			href: "https://www.deepagro.co/",
-			logo: deepAgroLogo,
-			description: <p>DeepAgro es una empresa de tecnología agrícola que desarrolla soluciones innovadoras para el sector agropecuario. Con un equipo de profesionales altamente capacitados, DeepAgro trabaja en la creación de tecnologías de vanguardia para mejorar la productividad y la eficiencia en el campo.</p>,
-		},
-		{
-			name: "IRobot",
-			href: "",
-			logo: irobotLogo,
-			description: <p>iRobot es una empresa líder en el desarrollo de robots domésticos y soluciones de limpieza inteligente. Con una amplia gama de productos innovadores, iRobot se destaca por su tecnología de vanguardia y su compromiso con la calidad y la excelencia.</p>,
-		},
-		{
-			name: "Trail Of Bits",
-			href: "https://www.trailofbits.com/",
-			logo: trailOfBitsLogo,
-			description: <p>Trail of Bits es una empresa de ciberseguridad que brinda servicios de consultoría, auditoría y desarrollo de software seguro. Con un equipo de expertos en seguridad informática, Trail of Bits trabaja con empresas de todo el mundo para proteger sus sistemas y datos de posibles amenazas.</p>,
-		},
-	];
-
-	const university = window.university || [
-		{
-			name: "Facultad de Ciencias Exactas, Ingeniería y Agrimensura",
-			href: "https://web.fceia.unr.edu.ar/es/",
-			logo: fceiaLogo,
-		},
-		{
-			name: "Universidad Nacional de Rosario",
-			href: "https://unr.edu.ar/",
-			logo: unrLogo,
-		},
-	];
-
+	const sponsors = window.sponsors;
+	const university = window.university;
+	const events  = window.schedule;
 	const lookingForJobs = window.sponsorsJobSearch || [
 		{
 			name: "NeuralSoft: Desarrolladores C++ Rosario",
@@ -77,19 +32,18 @@ const App = () => {
 						* Siendo parte de un proyecto de innovación de nivel mundial, <br />
 						* Potenciando tu desarrollo con un gran equipo de profesionales del mundo IT.</p>
 					<br />
-
+	
 					<p> Requisitos:</p>
 					<p> * Estudiantes avanzados o graduados de carreras de Sistemas o Ingenierías.</p>
 					<p> * Con conocimiento en programación y procesos del desarrollo de software</p>
 					<p> * Que posean conocimiento y experiencia en algunos de estos puntos :</p>
 					<p> Java, Javascript y/o Python ; C++ o C# ; Bases de datos SQL.; Desarrollo Mobile (IOS y Android, nativos); Deep Learning.</p>
 					<br />
-
+	
 					<p> Modalidad: Presencial.</p>
 				</>
 			),
-
-			logo: neuralLogo,
+			logo: "logo_neuralsoft.svg",
 		},
 	];
 
@@ -111,19 +65,6 @@ const App = () => {
 	}
 
 	const [tab, setTab] = useState(getCurrentTab());
-
-	const events: {
-		title: string;
-		subtitle?: string;
-		speakers?: string;
-		type: ItemType;
-		tab: number;
-	}[] = window.schedule || [{
-		title: "Proximamente",
-		tab: 0,
-		type: ItemType.Talk
-	}]
-
 	const [activeYear, setActiveYear] = useState(-1);
 
 	return (
@@ -228,13 +169,15 @@ const App = () => {
 						</h2>
 					</div>
 
-					<div className="flex flex-col md:flex-row w-full h-full gap-4 mt-4">
+					<div className="flex md:flex-wrap flex-col md:flex-row w-full h-full gap-4 mt-4 justify-center">
 						{sponsors.map((sponsor) => (
-							<HoverCard
-								title={sponsor.name}
-								subtitle={sponsor.description}
-								url={sponsor.logo}
-							/>
+							<div className="md:w-[24%]">
+								<HoverCard
+									title={sponsor.name}
+									subtitle={<p>{sponsor.description}</p>}
+									url={sponsor.logo}
+								/>
+							</div>
 						))}
 					</div>
 
@@ -250,7 +193,7 @@ const App = () => {
 							</h2>
 						</div>
 
-						<div className="flex flex-row w-[400px] h-full gap-4 mt-4 pl-8">
+						<div className="flex flex-row w-full md:w-[400px] h-full gap-4 mt-4 md:pl-8">
 							{lookingForJobs.map((sponsor) => (
 								<HoverCardWithModal
 									url={sponsor.logo}

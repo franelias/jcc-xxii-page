@@ -21,7 +21,6 @@ const HoverCard: React.FC<HoverCardProps> = ({ url, title, subtitle, link }) => 
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     cursor: link ? 'pointer' : 'default',
-                    // height: '250px', // Set a fixed height to ensure the image fills the card
                     transition: 'all 0.3s ease-in-out',
                 }}
             >
