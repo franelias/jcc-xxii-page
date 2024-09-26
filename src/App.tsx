@@ -13,11 +13,12 @@ import Terminal from "./components/Terminal";
 import instagramCard from "./assets/card_ig.png";
 import remeraCard from "./assets/card_remeras.png";
 import youtubeCard from "./assets/card_yt.png";
+import fiestaCard from "./assets/card_fiesta.png";
 
 const App = () => {
 	const sponsors = window.sponsors;
 	const university = window.university;
-	const events  = window.schedule;
+	// const events  = window.schedule;
 	const lookingForJobs = window.sponsorsJobSearch || [
 		{
 			name: "NeuralSoft: Desarrolladores C++ Rosario",
@@ -152,9 +153,15 @@ const App = () => {
 						/>
 						<HoverCard
 							title="¡Seguinos en Instagram!"
-							subtitle={<p>Contamos con redes oficiales de las jornadas! Vas a encontrar informacion actualizada, novedades y sorteos. ¡No te lo pierdas!</p>}
+							subtitle={<p>Contamos con redes oficiales de las jornadas! Vas a encontrar informacion actualizada, novedades y sorteos.</p>}
 							url={instagramCard}
 							link="https://www.instagram.com/jccfceia"
+						/>
+						<HoverCard
+							title="JodaCC"
+							subtitle={<p>Se viene la jodaCC, la fiesta de cierre de las jornadas. ¡No te la pierdas!</p>}
+							url={fiestaCard}
+							link="https://forms.gle/iYM5aAEE1MUHn97TA"
 						/>
 					</div>
 
