@@ -8,15 +8,23 @@ type HoverCardWithModalProps = {
   modalTitle: string;
   modalBody: JSX.Element;
   buttonUrl?: string;
+  noDarkmode?: boolean;
 };
 
-const HoverCardWithModal: React.FC<HoverCardWithModalProps> = ({ buttonUrl, url, cardTitle, cardSubtitle, modalTitle, modalBody }) => {
+const HoverCardWithModal: React.FC<HoverCardWithModalProps> = ({ buttonUrl, url, cardTitle, cardSubtitle, modalTitle, modalBody, noDarkmode }) => {
   const [hovered, setHovered] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleCancel = () => {
     setModalVisible(false);
   };
+  const ref = React.useRef<HTMLDivElement>(null);
+
+	React.useEffect(() => {
+		if (ref.current && noDarkmode)
+			ref.current.style.setProperty("background-color", "white", "important");
+	}, []);
+  
 
   return (
     <div className="flex w-full h-full flex-col">
@@ -34,6 +42,7 @@ const HoverCardWithModal: React.FC<HoverCardWithModalProps> = ({ buttonUrl, url,
           position: 'relative',
           transition: 'all 0.3s ease-in-out',
         }}
+        ref={ref}
       >
         {hovered && (
           <div

@@ -6,11 +6,15 @@ type HoverCardProps = {
     title?: string;
     subtitle?: JSX.Element;
     link?: string;
+    noDarkmode?: boolean;
 };
 
-const HoverCard: React.FC<HoverCardProps> = ({ url, title, subtitle, link }) => {
+const HoverCard: React.FC<HoverCardProps> = ({ url, title, subtitle, link, noDarkmode }) => {
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {if (ref.current && noDarkmode) ref.current.style.setProperty('background-color', 'white', 'important')}, []);
     return (
-        <div className="flex flex-col md:mt-0 mb-2 w-full">
+        <div className="flex flex-col md:mt-0 mb-2 w-full ">
             <Card
                 onClick={link ? () => window.open(link) : undefined}
                 className="relative overflow-hidden rounded-lg shadow-lg"
@@ -23,6 +27,7 @@ const HoverCard: React.FC<HoverCardProps> = ({ url, title, subtitle, link }) => 
                     cursor: link ? 'pointer' : 'default',
                     transition: 'all 0.3s ease-in-out',
                 }}
+                ref={ref}
             >
             </Card>
             <div className="mt-3 tracking-[-0.015em]">

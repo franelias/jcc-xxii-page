@@ -183,6 +183,7 @@ const App = () => {
 									title={sponsor.name}
 									subtitle={<p>{sponsor.description}</p>}
 									url={sponsor.logo}
+                  noDarkmode={true}
 								/>
 							</div>
 						))}
@@ -207,6 +208,7 @@ const App = () => {
 									modalBody={sponsor.description}
 									modalTitle={sponsor.name}
 									buttonUrl={sponsor.apply}
+                  noDarkmode={true}
 								/>
 							))}
 						</div>
@@ -226,6 +228,7 @@ const App = () => {
 								title={university.name}
 								url={university.logo}
 								link={university.href}
+                noDarkmode={true}
 							/>
 						))}
 					</div>
