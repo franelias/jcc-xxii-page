@@ -146,7 +146,7 @@ window.schedule = [
 			"La robótica móvil está transformando la agricultura de precisión. Los nuevos avances científicos y tecnológicos permiten realizar tareas altamente repetitivas de forma precisa y eficaz. Para que un robot pueda operar en un campo y llevar a cabo tareas agrícolas, necesita saber dónde se encuentra. En esta charla, presentaremos una técnica de fusión de sensores (cámaras, IMUs y GPS) desarrollada en CIFASIS (CONICET-UNR) que permite a un robot estimar su posición y orientación con precisión en entornos agrícolas, incluso en condiciones desafiantes como terrenos irregulares, cambios de iluminación y alta similaridad entre distintos lugares de la escena.",
 	},
 	{
-		title: "Coffee break (y muestra de programacion 1)",
+		title: "Coffee break (y muestra de Programacion I)",
 		subtitle: "16:00 - 17:00",
 		speakers: "",
 		type: "activity",
@@ -165,8 +165,8 @@ window.schedule = [
 	},
 	{
 		title: "Let's map it!",
-		subtitle: "iRobot",
-		speakers: "18:00 - 19:00",
+		subtitle: "18:00 - 19:00",
+		speakers: "iRobot",
 		type: "talk",
 		tab: 2,
 		description:
@@ -174,15 +174,15 @@ window.schedule = [
 	},
 	{
 		title: "Activismo para informáticos",
-		subtitle: "Martín Vokovic",
-		speakers: "",
+		subtitle: "19:00 - 20:00",
+		speakers: "Martín Vokovic",
 		type: "talk",
 		tab: 2,
 		description:
 			'Muchos nos hemos planteado a lo largo de nuestra carrera informática "¿cómo puede servir lo que sé/estudio para ayudar a los demás?". En esta charla, vamos a intentar responder esta pregunta, conoceremos algunas posibles vías de acción, y veremos algunos ejemplos concretos de activismo y su impacto.',
 	},
 	{
-		title: "Football",
+		title: "Futbol LCC",
 		subtitle: "21:00",
 		speakers: "",
 		type: "activity",

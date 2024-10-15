@@ -91,6 +91,12 @@ const App = () => {
   const [tab, setTab] = useState(getCurrentTab());
   const [activeYear, setActiveYear] = useState(-1);
 
+  const days = {
+    1: "Miercoles",
+    2: "Jueves",
+    3: "Viernes"
+  }
+
   return (
     <Layout style={{ fontFamily: "Reddit sans" }}>
       <Header />
@@ -168,7 +174,7 @@ const App = () => {
               .map((e) => (
                 <Item
                   title={e.title}
-                  subtitle={e?.subtitle}
+                  subtitle={tab === 0 ?  `${days[e.tab]} ${e?.subtitle}` :  e?.subtitle}
                   speaker={e?.speakers}
                   description={e.description}
                   type={e.type as ItemType}

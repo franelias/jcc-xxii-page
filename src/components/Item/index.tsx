@@ -77,7 +77,11 @@ const Item = ({
       </div>
 
       <Modal
-        title={<p className="text-center">{title}</p>}
+        title={
+          <>
+          <h1 className="text-center">{title}</h1>
+          <p className="text-center leading-normal text-sm mt-[5px]">{speaker}</p>
+          </>}
         open={modalVisible}
         onCancel={() => setModalVisible(false)}
         footer={null}
