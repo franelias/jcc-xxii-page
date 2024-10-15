@@ -2,7 +2,7 @@ window.schedule = [
 	{
 		title:
 			"Taller para el estudiante de a pie o: cómo (podrías) usar tu computadora",
-		subtitle: "9:00 - 11:00",
+		subtitle: "9:00 - 12:00",
 		speakers: "Sebastian Morales",
 		type: "workshop",
 		tab: 1,
@@ -175,7 +175,7 @@ window.schedule = [
 	{
 		title: "Activismo para informáticos",
 		subtitle: "19:00 - 20:00",
-		speakers: "Martín Vokovic",
+		speakers: "Martín Vukovic",
 		type: "talk",
 		tab: 2,
 		description:
