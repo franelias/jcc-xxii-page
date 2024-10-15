@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import { Button, Card, Modal } from 'antd';
+import { Card, Modal } from 'antd';
 
-type HoverCardWithModalProps = {
+type CardWithModalProps = {
   url: string;
   cardTitle?: string;
   cardSubtitle?: string;
   modalTitle: string;
   modalBody: JSX.Element;
-  buttonUrl?: string;
   noDarkmode?: boolean;
 };
 
-const HoverCardWithModal: React.FC<HoverCardWithModalProps> = ({ buttonUrl, url, cardTitle, cardSubtitle, modalTitle, modalBody, noDarkmode }) => {
+const CardWithModal: React.FC<CardWithModalProps> = ({ url, cardTitle, cardSubtitle, modalTitle, modalBody, noDarkmode }) => {
   const [hovered, setHovered] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -24,7 +23,7 @@ const HoverCardWithModal: React.FC<HoverCardWithModalProps> = ({ buttonUrl, url,
 		if (ref.current && noDarkmode)
 			ref.current.style.setProperty("background-color", "white", "important");
 	}, [noDarkmode]);
-
+  
   return (
     <div className="flex w-full h-full flex-col">
       <Card
@@ -71,16 +70,10 @@ const HoverCardWithModal: React.FC<HoverCardWithModalProps> = ({ buttonUrl, url,
       >
         <div className='flex flex-col' >
           {modalBody}
-
-          {buttonUrl && <div className='flex items-center justify-center mt-2'><Button onClick={() => window.open(buttonUrl)}>
-            Aplica ahora!
-          </Button></div>}
-
         </div>
-
       </Modal>
     </div>
   );
 };
 
-export default HoverCardWithModal;
+export default CardWithModal;

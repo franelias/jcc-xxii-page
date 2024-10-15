@@ -6,7 +6,8 @@ declare global {
       subtitle?: string;
       speakers?: string;
       type: ItemType;
-      tab: number;  
+      tab: number;
+      description: string;
     }[];
     sponsors: {
       name: string;

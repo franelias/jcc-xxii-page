@@ -18,7 +18,7 @@ import fiestaCard from "./assets/card_fiesta.png";
 const App = () => {
 	const sponsors = window.sponsors;
 	const university = window.university;
-	// const events  = window.schedule;
+	const events  = window.schedule;
 	const lookingForJobs = window.sponsorsJobSearch || [
 		{
 			name: "NeuralSoft: Desarrolladores C++ Rosario",
@@ -92,8 +92,7 @@ const App = () => {
 							</a>
 						</div>
 						<h2 className="text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">{tab === 0 ? "Todos los eventos" : "Eventos del dia"}</h2>
-						{/* {events?.filter((event) => event.tab === tab || tab === 0).map((e) => <Item title={e.title} subtitle={e?.subtitle} speaker={e?.speakers} type={e.type as ItemType} />)} */}
-						<Item title="Proximamente" type={ItemType.Talk} />
+						{events?.filter((event) => event.tab === tab || tab === 0).map((e) => <Item title={e.title} subtitle={e?.subtitle} speaker={e?.speakers}  description={e.description} type={e.type as ItemType} />)}
 					</div>
 
 					<div className="flex mt-12 flex-col md:flex-row group rounded-xl" id="MasInfo">
