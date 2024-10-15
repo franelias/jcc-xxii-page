@@ -146,7 +146,7 @@ window.schedule = [
 			"La robótica móvil está transformando la agricultura de precisión. Los nuevos avances científicos y tecnológicos permiten realizar tareas altamente repetitivas de forma precisa y eficaz. Para que un robot pueda operar en un campo y llevar a cabo tareas agrícolas, necesita saber dónde se encuentra. En esta charla, presentaremos una técnica de fusión de sensores (cámaras, IMUs y GPS) desarrollada en CIFASIS (CONICET-UNR) que permite a un robot estimar su posición y orientación con precisión en entornos agrícolas, incluso en condiciones desafiantes como terrenos irregulares, cambios de iluminación y alta similaridad entre distintos lugares de la escena.",
 	},
 	{
-		title: "Coffee break (y muestra de prog1)",
+		title: "Coffee break (y muestra de programacion 1)",
 		subtitle: "16:00 - 17:00",
 		speakers: "",
 		type: "activity",
