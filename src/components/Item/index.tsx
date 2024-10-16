@@ -36,8 +36,9 @@ const Item = ({
       <div
         className={clsx(
           "flex items-center gap-4 px-4 py-3 justify-between mb-2 rounded-lg",
-          type === "talk" && "bg-white",
-          type === "activity" && "bg-[#f8f1d9]"
+          type === ItemType.Talk && "bg-white",
+          type === ItemType.Activity && "bg-[#f8f1d9]",
+          type === ItemType.Workshop && "bg-[#ffecad]"
         )}
       >
         <div className="flex items-center gap-4">
@@ -47,7 +48,7 @@ const Item = ({
           ></div>
           <div className="flex flex-col justify-center">
             <p className="md:hidden text-[#151711] text-base font-medium leading-normal line-clamp-1">
-              {title} {speaker}
+              {title}
             </p>
             <p className="md:hidden text-[#151711]  font-medium leading-normal line-clamp-1">
               {speaker}
@@ -79,14 +80,13 @@ const Item = ({
       <Modal
         title={
           <>
-          <h1 className="text-center">{title}</h1>
-          <p className="text-center leading-normal text-sm mt-[5px]">{speaker}</p>
+            <h1 className="text-center">{title}</h1>
+            <p className="text-center leading-normal text-sm mt-[5px]">{speaker}</p>
           </>}
         open={modalVisible}
         onCancel={() => setModalVisible(false)}
         footer={null}
         centered
-        closable={false}
       >
         <div className="flex flex-col text-center">
           {intl.formatMessage(

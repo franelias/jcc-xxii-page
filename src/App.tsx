@@ -164,7 +164,7 @@ const App = () => {
               <h2 className="text-[#151711] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
                 {tab === 0 ? "Todos los eventos" : "Eventos del dia"}{" "}
               </h2>
-              <p className="md:hidden text-[#151711] text-[14px] leading-tight tracking-[-0.015em] px-4">
+              <p className="md:hidden text-[#151711] text-[14px] leading-tight tracking-[-0.015em] px-4 pb-4">
                 Toca en una charla para ver mas info
               </p>
             </div>
@@ -174,7 +174,7 @@ const App = () => {
               .map((e) => (
                 <Item
                   title={e.title}
-                  subtitle={tab === 0 ?  `${days[e.tab]} ${e?.subtitle}` :  e?.subtitle}
+                  subtitle={tab === 0 ? `${days[e.tab]} ${e?.subtitle}` : e?.subtitle}
                   speaker={e?.speakers}
                   description={e.description}
                   type={e.type as ItemType}
