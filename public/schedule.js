@@ -86,7 +86,7 @@ window.schedule = [
 		speakers: "",
 		type: "activity",
 		tab: 1,
-		description: "",
+		description: "Happy Hour en Beer Bros (Pellegrini 388)",
 	},
 	{
 		title: "Sistemas de tipos y métodos formales para concurrencia segura",
@@ -183,12 +183,20 @@ window.schedule = [
 	},
 	{
 		title: "Futbol LCC",
-		subtitle: "21:00",
+		subtitle: "21:00 - 23:00",
 		speakers: "",
 		type: "activity",
 		tab: 2,
-		description: "",
+		description: "Futbol en Olimpicus (Tucumán 3140)",
 	},
+ { 
+  title: "Juegos de mesa LCC",
+  subtitle: "21:00",
+  speakers: "",
+  type: "activity",
+  tab: 2,
+  description: "Juegos de mesa en La Fortaleza (Salta 2845)",
+ },
 	{
 		title:
 			"Strong normalization y medidas decrecientes: demostraciones sintácticas de terminación en λ-cálculo tipado",
