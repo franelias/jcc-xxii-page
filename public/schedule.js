@@ -123,7 +123,7 @@ window.schedule = [
 		type: "talk",
 		tab: 2,
 		description:
-			"A medida que el sector espacial experimenta un crecimiento sin precedentes, impulsado por proyectos como Starlink, redes IoT satelitales, y el sistema colaborativo LunaNet de la NASA, ESA y JAXA, surgen nuevos desafíos y oportunidades para la investigación en comunicaciones satelitales. Este seminario abordará tres áreas fundamentales en la investigación de redes espaciales y satelitales: {br}{br}- Operaciones de Mega-Constelaciones: Las redes en órbita baja terrestre proporcionan conectividad mejorada, pero requieren soluciones novedosas en routing, scheduling y traffic management para abordar problemas de escalabilidad y latencia.{br}{br}- Acceso Directo a Satélites: Los sistemas directos a smartphones y sistemas IoT están reduciendo las brechas de conectividad en entornos con recursos limitados, lo que plantea interrogantes sobre la eficiencia energética, protocolos de comunicación e integración espacial y terrestre. {br}{br}- Internet del Sistema Solar: El concepto de un internet interplanetario que abarque grandes distancias requiere enfoques innovadores para superar los desafíos de delay, escalabilidad y congestión. {br}{br}Discutiremos cómo metodologías avanzadas, como la optimización, procesos de decisión y técnicas de IA, están siendo aplicadas para enfrentar estos desafíos y dar forma al futuro de las redes de comunicación globales e interplanetarias.",
+			"<left> A medida que el sector espacial experimenta un crecimiento sin precedentes, impulsado por proyectos como Starlink, redes IoT satelitales, y el sistema colaborativo LunaNet de la NASA, ESA y JAXA, surgen nuevos desafíos y oportunidades para la investigación en comunicaciones satelitales. Este seminario abordará tres áreas fundamentales en la investigación de redes espaciales y satelitales: {br}{br} <ul><li> Operaciones de Mega-Constelaciones: Las redes en órbita baja terrestre proporcionan conectividad mejorada, pero requieren soluciones novedosas en routing, scheduling y traffic management para abordar problemas de escalabilidad y latencia.</li><li> Acceso Directo a Satélites: Los sistemas directos a smartphones y sistemas IoT están reduciendo las brechas de conectividad en entornos con recursos limitados, lo que plantea interrogantes sobre la eficiencia energética, protocolos de comunicación e integración espacial y terrestre. </li><li> Internet del Sistema Solar: El concepto de un internet interplanetario que abarque grandes distancias requiere enfoques innovadores para superar los desafíos de delay, escalabilidad y congestión.</li></ul>{br}Discutiremos cómo metodologías avanzadas, como la optimización, procesos de decisión y técnicas de IA, están siendo aplicadas para enfrentar estos desafíos y dar forma al futuro de las redes de comunicación globales e interplanetarias. </left>",
 	},
 	{
 		title:
@@ -189,14 +189,14 @@ window.schedule = [
 		tab: 2,
 		description: "Futbol en Olimpicus (Tucumán 3140)",
 	},
- { 
-  title: "Juegos de mesa LCC",
-  subtitle: "21:00",
-  speakers: "",
-  type: "activity",
-  tab: 2,
-  description: "Juegos de mesa en La Fortaleza (Salta 2845)",
- },
+	{
+		title: "Juegos de mesa LCC",
+		subtitle: "21:00",
+		speakers: "",
+		type: "activity",
+		tab: 2,
+		description: "Juegos de mesa en La Fortaleza (Salta 2845)",
+	},
 	{
 		title:
 			"Strong normalization y medidas decrecientes: demostraciones sintácticas de terminación en λ-cálculo tipado",
