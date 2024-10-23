@@ -74,12 +74,15 @@ const App = () => {
   const getCurrentTab = () => {
     const today = new Date();
 
-    switch (today.toDateString()) {
-      case "2024-10-23":
+    switch (today.toLocaleDateString()) {
+      case "23/10/2024":
+      case "10/23/2024":
         return 1;
-      case "2024-10-24":
+      case "24/10/2024":
+      case "10/24/2024":
         return 2;
-      case "2024-10-25":
+      case "25/10/2024":
+      case "10/25/2024":
         return 3;
       default:
         break;
