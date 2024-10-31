@@ -41,7 +41,7 @@ window.schedule = [
 		type: "talk",
 		tab: 1,
 		description:
-			"Lecciones aprendidas durante el desarrollo y la implementación de un Chatbot con base en conocimiento propio e IA.",
+			"Lecciones aprendidas durante el desarrollo y la implementación de un Chatbot con base en conocimiento propio e IA.{br} {br}Disertantes: Juan Bossetti, German Frontalini y Dante Venini",
 	},
 	{
 		title: "Coffee break",
